@@ -88,9 +88,7 @@
     Datepicker
     ................................................. */
 	
-	$('.datepicker').pickadate();
 	
-	$('.time').pickatime();
 	
 	
 	
