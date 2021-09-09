@@ -18,3 +18,9 @@ class MenuView(View):
 class FeaturesView(View):
     def get(self,request):
         return render(request,'./pages/features.html',{'nbar':'features'})
+class LoginView(View):
+    def get(self,request):
+        return render(request,'./pages/login.html',{'nbar':'login'})
+class SignupView(View):
+    def get(self,request):
+        return render(request,'./pages/signup.html',{'nbar':'signup'})

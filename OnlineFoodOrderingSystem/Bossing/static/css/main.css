@@ -1,0 +1,251 @@
+@import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback');
+
+html,body{
+    background: #f4f6f9;
+    font-family: 'Source Sans Pro', sans-serif;
+}
+::selection{
+    color: #fff;
+    background: #343a40;
+}
+.container{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+.container .form{
+    background: #fff;
+    padding: 30px 35px;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+.container .form form .form-control{
+    height: 40px;
+    font-size: 15px;
+}
+.container .form form .forget-pass{
+    margin: -15px 0 15px 0;
+}
+.container .form form .forget-pass a{
+   font-size: 15px;
+}
+.container .form form .button{
+    background: #343a40;
+    color: #fff;
+    font-size: 17px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+.container .form form .button:hover{
+    background: gray;
+}
+.container .form form .link{
+    padding: 5px 0;
+}
+.container .form form .link a{
+    color: #343a40;
+}
+.container .login-form form p{
+    font-size: 14px;
+}
+.container .row .alert{
+    font-size: 14px;
+}
+:root {
+    --input-padding-x: .75rem;
+    --input-padding-y: .65rem;
+  }
+  
+  html,
+  body {
+    height: 100%;
+  }
+  
+  body {
+    display: -ms-flexbox;
+    display: -webkit-box;
+    display: flex;
+    -ms-flex-align: center;
+    -ms-flex-pack: center;
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    justify-content: center;
+    padding-top: 40px;
+    padding-bottom: 40px;
+    background-color: #f5f5f5;
+  }
+  
+.form-signin {
+  width: 100%;
+  max-width: 420px;
+  padding: 15px;
+  margin: auto;
+}
+
+.form-label-group {
+  position: relative;
+  margin-bottom: 1rem;
+}
+
+.form-label-group > input,
+.form-label-group > label,
+.input-group > input,
+.input-group > label {
+  height: 3.125rem;
+  padding: .75rem;
+}
+
+.form-label-group > label,
+.input-group > label {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: block;
+  width: 100%;
+  margin-bottom: 0; /* Override default `<label>` margin */
+  line-height: 1.5;
+  color: #495057;
+  pointer-events: none;
+  cursor: text; /* Match the input under the label */
+  border: 1px solid transparent;
+  border-radius: .25rem;
+  z-index: 3;
+  transition: all .1s ease-in-out;
+}
+
+.form-label-group input::-webkit-input-placeholder {
+  color: transparent;
+}
+
+.form-label-group input:-ms-input-placeholder {
+  color: transparent;
+}
+
+.form-label-group input::-ms-input-placeholder {
+  color: transparent;
+}
+
+.form-label-group input::-moz-placeholder {
+  color: transparent;
+}
+
+.form-label-group input::placeholder {
+  color: transparent;
+}
+
+.form-label-group input:not(:placeholder-shown) {
+  padding-top: 1.25rem;
+  padding-bottom: .25rem;
+}
+
+.form-label-group input:not(:placeholder-shown) ~ label {
+  padding-top: .25rem;
+  padding-bottom: .25rem;
+  font-size: 12px;
+  color: #777;
+}
+
+/* Fallback for Edge
+-------------------------------------------------- */
+@supports (-ms-ime-align: auto) {
+  .form-label-group > label {
+    display: none;
+  }
+  .form-label-group input::-ms-input-placeholder {
+    color: #777;
+  }
+}
+
+/* Fallback for IE
+-------------------------------------------------- */
+@media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
+  .form-label-group > label {
+    display: none;
+  }
+  .form-label-group input:-ms-input-placeholder {
+    color: #777;
+  }
+}
+
+
+/* Account */
+.ui-w-30 {
+  width: 30px !important;
+  height: auto;
+}
+
+.btn-default {
+  border-color: rgba(24,28,33,0.1);
+  background: rgba(0,0,0,0);
+  color: #4E5155;
+}
+
+label.btn {
+  margin-bottom: 0;
+}
+
+.btn-outline-primary {
+  border-color: #26B4FF;
+  background: transparent;
+  color: #26B4FF;
+}
+
+.btn {
+  cursor: pointer;
+}
+
+.text-light {
+  color: #babbbc !important;
+}
+
+.row-bordered {
+  overflow: hidden;
+}
+
+.account-settings-fileinput {
+  position: absolute;
+  visibility: hidden;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+}
+.account-settings-links .list-group-item.active {
+  font-weight: bold !important;
+}
+html:not(.dark-style) .account-settings-links .list-group-item.active {
+  background: transparent !important;
+}
+.account-settings-multiselect ~ .select2-container {
+  width: 100% !important;
+}
+.light-style .account-settings-links .list-group-item {
+  padding: 0.85rem 1.5rem;
+  border-color: rgba(24, 28, 33, 0.03) !important;
+}
+.light-style .account-settings-links .list-group-item.active {
+  color: #4e5155 !important;
+}
+.material-style .account-settings-links .list-group-item {
+  padding: 0.85rem 1.5rem;
+  border-color: rgba(24, 28, 33, 0.03) !important;
+}
+.material-style .account-settings-links .list-group-item.active {
+  color: #4e5155 !important;
+}
+.dark-style .account-settings-links .list-group-item {
+  padding: 0.85rem 1.5rem;
+  border-color: rgba(255, 255, 255, 0.03) !important;
+}
+.dark-style .account-settings-links .list-group-item.active {
+  color: #fff !important;
+}
+.light-style .account-settings-links .list-group-item.active {
+  color: #4E5155 !important;
+}
+.light-style .account-settings-links .list-group-item {
+  padding: 0.85rem 1.5rem;
+  border-color: rgba(24,28,33,0.03) !important;
+}
+
