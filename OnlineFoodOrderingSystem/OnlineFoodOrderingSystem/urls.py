@@ -21,7 +21,7 @@ app_name='Bossing'
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('',views.IndexView.as_view(),name ="index_view"),
+    path('home',views.IndexView.as_view(),name ="index_view"),
     path('contact',views.ContactView.as_view(),name ="contact_view"),
     path('about',views.AboutView.as_view(),name ="about_view"),
     path('menu',views.MenuView.as_view(),name ="menu_view"),
