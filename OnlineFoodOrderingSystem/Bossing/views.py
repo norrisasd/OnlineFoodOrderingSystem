@@ -24,3 +24,4 @@ class LoginView(View):
 class SignupView(View):
     def get(self,request):
         return render(request,'./pages/signup.html',{'nbar':'signup'})
+        
