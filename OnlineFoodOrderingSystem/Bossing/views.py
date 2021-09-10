@@ -5,7 +5,7 @@ from django.views.generic import View
 class IndexView(View):
     def get(self,request):
         return render(request,'./pages/index.html',{'nbar':'home'})
-
+#About View
 class AboutView(View):
     def get(self,request):
         return render(request,'./pages/about.html',{'nbar':'about'})
