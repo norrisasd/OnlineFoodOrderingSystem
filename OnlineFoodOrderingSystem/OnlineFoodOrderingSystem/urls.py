@@ -16,10 +16,12 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from Bossing import views
+from django.views.generic.base import RedirectView
 
 app_name='Bossing'
 
 urlpatterns = [
+    path('',RedirectView.as_view(url='home', permanent=False), name='index_view'),
     path('admin/', admin.site.urls),
     path('home',views.IndexView.as_view(),name ="index_view"),
     path('contact',views.ContactView.as_view(),name ="contact_view"),
