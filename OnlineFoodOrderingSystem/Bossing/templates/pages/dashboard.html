@@ -65,11 +65,11 @@
                                         <td>{{user.first_name}}</td>
                                         <td>{{user.last_name}}</td>
                                         <td>{{user.phone_number}}</td>
-                                        <td>{% if user.is_admin == 2 %}Admin{% else %}User{% endif %}</td>
+                                        <td>{% if user.is_admin == 1 %}Admin{% else %}User{% endif %}</td>
                                         <td>
                                             <div class="row text-center">
                                                 <div class="col">
-                                                    <a class="btn btn-outline-secondary  text-center" href="#"><i
+                                                    <a class="btn btn-outline-secondary text-center" href="#"><i
                                                             class="fas fa-edit"></i></a>
                                                 </div>
                                                 <div class="col">
@@ -130,7 +130,16 @@
                                     <td>{{product.product_category}}</td>
                                     <td>{{product.price}}</td>
                                     <td>
-                                        Update | Delete
+                                        <div class="row text-center">
+                                            <div class="col">
+                                                <a class="btn btn-outline-secondary text-center" href="#"><i
+                                                        class="fas fa-edit"></i></a>
+                                            </div>
+                                            <div class="col">
+                                                <a href="#" class="btn btn-outline-secondary text-center"><i
+                                                        class="fas fa-trash-alt"></i></a>
+                                            </div>
+                                        </div>
                                     </td>
                                 </tr>
                                 {% endfor %}
