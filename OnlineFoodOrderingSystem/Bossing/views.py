@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.views.generic import View
+from .forms import *
 
 # Create your views here.
 class IndexView(View):
@@ -26,5 +27,9 @@ class SignupView(View):
         return render(request,'./pages/signup.html',{'nbar':'signup'})
 class DashboardView(View):
     def get(self,request):
-        return render(request,'./pages/dashboard.html',{'nbar':'dashboard'})
+        users = User.objects.all()
+        context = {
+            'users': users
+        }
+        return render(request,'./pages/dashboard.html', context)
         

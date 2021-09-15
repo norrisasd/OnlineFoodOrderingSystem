@@ -51,11 +51,22 @@
                             <th>Last Name</th>
                             <th>Phone Number</th>
                             <th>Access</th>
+                            <th>Action</th>
                             </tr>
                             </thead>
                             <tbody>
-
-
+                                {% for user in users %}
+                                <tr>
+                                    <td></td>
+                                    <td>{{user.user_id}}</td>
+                                    <td>{{user.username}}</td>
+                                    <td>{{user.password}}</td>
+                                    <td>{{user.first_name}}</td>
+                                    <td>{{user.last_name}}</td>
+                                    <td>{{user.phone_number}}</td>
+                                    <td>{{user.is_admin}}</td>
+                                </tr>
+                                {% endfor %}
                             </tbody>
                             <tfoot>
                                 <tr>
@@ -67,6 +78,7 @@
                                     <th>Last Name</th>
                                     <th>Phone Number</th>
                                     <th>Access</th>
+                                    <th>Action</th>
                                 </tr>
                             </tfoot>
                         </table>
@@ -90,6 +102,7 @@
                             <th>Product Name</th>
                             <th>Product Category</th>
                             <th>Price</th>
+                            <th>Action</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -103,6 +116,7 @@
                                     <th>Product Name</th>
                                     <th>Product Category</th>
                                     <th>Price</th>
+                                    <th>Action</th>
                                 </tr>
                             </tfoot>
                         </table>
