@@ -29,7 +29,8 @@ class DashboardView(View):
     def get(self,request):
         users = User.objects.all()
         context = {
-            'users': users
+            'users': users,
+            'nbar':'dashboard'
         }
         return render(request,'./pages/dashboard.html', context)
         

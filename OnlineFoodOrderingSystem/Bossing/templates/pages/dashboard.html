@@ -29,61 +29,77 @@
             <!-- Main content -->
             <section class="content">
                 <div class="container-fluid">
-                    <div class="card-body">
-                        <div class="row align-items-start" style="margin-bottom: 1%; margin-top: 2.5%;">
-                            <div class="col text-center">
-                                <h1 class="display-4">User Table</h1>
+                    <div id="firsttable">
+                        <div class="card-body">
+                            <div class="row align-items-start" style="margin-bottom: 1%; margin-top: 2.5%;">
+                                <div class="col text-center">
+                                    <h1 class="display-4">User Table</h1>
+                                </div>
                             </div>
-                        </div>
-                        <table id="dataTable" class="table table-bordered table-hover">
-                            <thead>
-                                <tr>
-                                    <th class=" text-center"><input type="checkbox" onchange="
+                            <table id="dataTable" class="table table-bordered table-hover">
+                                <thead>
+                                    <tr>
+                                        <th class=" text-center"><input type="checkbox" onchange="
                                             if(this.checked)
                                                 dt.rows().select();
                                             else
                                                 dt.rows().deselect();
                                         "></th>
-                            <th>User ID</th>
-                            <th>Username</th>
-                            <th>Password</th>
-                            <th>First Name</th>
-                            <th>Last Name</th>
-                            <th>Phone Number</th>
-                            <th>Access</th>
-                            <th>Action</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                                {% for user in users %}
-                                <tr>
-                                    <td></td>
-                                    <td>{{user.user_id}}</td>
-                                    <td>{{user.username}}</td>
-                                    <td>{{user.password}}</td>
-                                    <td>{{user.first_name}}</td>
-                                    <td>{{user.last_name}}</td>
-                                    <td>{{user.phone_number}}</td>
-                                    <td>{{user.is_admin}}</td>
-                                </tr>
-                                {% endfor %}
-                            </tbody>
-                            <tfoot>
-                                <tr>
-                                    <th class="text-center"></th>
-                                    <th>User ID</th>
-                                    <th>Username</th>
-                                    <th>Password</th>
-                                    <th>First Name</th>
-                                    <th>Last Name</th>
-                                    <th>Phone Number</th>
-                                    <th>Access</th>
-                                    <th>Action</th>
-                                </tr>
-                            </tfoot>
-                        </table>
-                        <br>
-                        <hr>
+                                        <th>User ID</th>
+                                        <th>Username</th>
+                                        <th>Password</th>
+                                        <th>First Name</th>
+                                        <th>Last Name</th>
+                                        <th>Phone Number</th>
+                                        <th>Access</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for user in users %}
+                                    <tr>
+                                        <td></td>
+                                        <td>{{user.user_id}}</td>
+                                        <td>{{user.username}}</td>
+                                        <td>{{user.password}}</td>
+                                        <td>{{user.first_name}}</td>
+                                        <td>{{user.last_name}}</td>
+                                        <td>{{user.phone_number}}</td>
+                                        <td>{% if user.is_admin == 2 %}Admin{% else %}User{% endif %}</td>
+                                        <td>
+                                            <div class="row text-center">
+                                                <div class="col">
+                                                    <a class="btn btn-outline-secondary  text-center" href="#"><i
+                                                            class="fas fa-edit"></i></a>
+                                                </div>
+                                                <div class="col">
+                                                    <a href="#" class="btn btn-outline-secondary text-center"><i
+                                                            class="fas fa-trash-alt"></i></a>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <th class="text-center"></th>
+                                        <th>User ID</th>
+                                        <th>Username</th>
+                                        <th>Password</th>
+                                        <th>First Name</th>
+                                        <th>Last Name</th>
+                                        <th>Phone Number</th>
+                                        <th>Access</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                    </div>
+                    <br>
+
+                    <div id="secondtable" style="display:none">
                         <div class="row align-items-start" style="margin-bottom: 1%; margin-top: 2.5%;">
                             <div class="col text-center">
                                 <h1 class="display-4">Product Table</h1>
@@ -98,12 +114,12 @@
                                             else
                                                 dt1.rows().deselect();
                                         "></th>
-                            <th>Product ID</th>
-                            <th>Product Name</th>
-                            <th>Product Category</th>
-                            <th>Price</th>
-                            <th>Action</th>
-                            </tr>
+                                    <th>Product ID</th>
+                                    <th>Product Name</th>
+                                    <th>Product Category</th>
+                                    <th>Price</th>
+                                    <th>Action</th>
+                                </tr>
                             </thead>
                             <tbody>
 
