@@ -28,8 +28,11 @@ class SignupView(View):
 class DashboardView(View):
     def get(self,request):
         users = User.objects.all()
+        products = Product.objects.all()
         context = {
-            'users': users
+            'users': users,
+            'products': products,
+            'nbar': 'dashboard'
         }
         return render(request,'./pages/dashboard.html', context)
         

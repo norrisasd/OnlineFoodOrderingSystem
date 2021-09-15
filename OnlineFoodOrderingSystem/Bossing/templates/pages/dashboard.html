@@ -65,6 +65,9 @@
                                     <td>{{user.last_name}}</td>
                                     <td>{{user.phone_number}}</td>
                                     <td>{{user.is_admin}}</td>
+                                    <td>
+                                        Update | Delete
+                                    </td>
                                 </tr>
                                 {% endfor %}
                             </tbody>
@@ -106,8 +109,18 @@
                             </tr>
                             </thead>
                             <tbody>
-
-
+                                {% for product in products %}
+                                <tr>
+                                    <td></td>
+                                    <td>{{product.product_id}}</td>
+                                    <td>{{product.product_name}}</td>
+                                    <td>{{product.product_category}}</td>
+                                    <td>{{product.price}}</td>
+                                    <td>
+                                        Update | Delete
+                                    </td>
+                                </tr>
+                                {% endfor %}
                             </tbody>
                             <tfoot>
                                 <tr>
