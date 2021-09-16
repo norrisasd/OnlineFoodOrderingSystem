@@ -25,6 +25,9 @@ class LoginView(View):
 class SignupView(View):
     def get(self,request):
         return render(request,'./pages/signup.html',{'nbar':'signup'})
+class TryView(View):
+    def get(self,request):
+        return render(request,'./pages/try.html',{'nbar':'try'})
 class DashboardView(View):
     def get(self,request):
         users = User.objects.all()

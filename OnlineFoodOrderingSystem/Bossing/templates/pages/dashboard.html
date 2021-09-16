@@ -36,8 +36,8 @@
                                     <h1 class="display-4">User Table</h1>
                                 </div>
                             </div>
-                            <table id="dataTable" class="table table-bordered table-hover">
-                                <thead>
+                            <table id="dataTable" class="table table-borderless table-hover" >
+                                <thead class="thead-dark">
                                     <tr>
                                         <th class=" text-center"><input type="checkbox" onchange="
                                             if(this.checked)
@@ -97,64 +97,64 @@
                             </table>
                         </div>
                     </div>
-                    <br>
-
                     <div id="secondtable" style="display:none">
-                        <div class="row align-items-start" style="margin-bottom: 1%; margin-top: 2.5%;">
-                            <div class="col text-center">
-                                <h1 class="display-4">Product Table</h1>
+                        <div class="card-body">
+                            <div class="row align-items-start" style="margin-bottom: 1%; margin-top: 2.5%;">
+                                <div class="col text-center">
+                                    <h1 class="display-4">Product Table</h1>
+                                </div>
                             </div>
-                        </div>
-                        <table id="dataTable1" class="table table-bordered table-hover">
-                            <thead>
-                                <tr>
-                                    <th class=" text-center"><input type="checkbox" onchange="
+                            <table id="dataTable1" class="table table-borderless table-hover">
+                                <thead class="thead-dark">
+                                    <tr>
+                                        <th class=" text-center"><input type="checkbox" onchange="
                                             if(this.checked)
                                                 dt1.rows().select();
                                             else
                                                 dt1.rows().deselect();
                                         "></th>
-                                    <th>Product ID</th>
-                                    <th>Product Name</th>
-                                    <th>Product Category</th>
-                                    <th>Price</th>
-                                    <th>Action</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {% for product in products %}
-                                <tr>
-                                    <td></td>
-                                    <td>{{product.product_id}}</td>
-                                    <td>{{product.product_name}}</td>
-                                    <td>{{product.product_category}}</td>
-                                    <td>{{product.price}}</td>
-                                    <td>
-                                        <div class="row text-center">
-                                            <div class="col">
-                                                <a class="btn btn-outline-secondary text-center" href="#"><i
-                                                        class="fas fa-edit"></i></a>
+                                        <th>Product ID</th>
+                                        <th>Product Name</th>
+                                        <th>Product Category</th>
+                                        <th>Price</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for product in products %}
+                                    <tr>
+                                        <td></td>
+                                        <td>{{product.product_id}}</td>
+                                        <td>{{product.product_name}}</td>
+                                        <td>{{product.product_category}}</td>
+                                        <td>{{product.price}}</td>
+                                        <td>
+                                            <div class="row text-left">
+                                                <div class="col-sm">
+                                                    <a class="btn btn-outline-secondary text-center" href="#"><i
+                                                            class="fas fa-edit"></i></a>
+                                                </div>
+                                                <div class="col">
+                                                    <a href="#" class="btn btn-outline-secondary text-center"><i
+                                                            class="fas fa-trash-alt"></i></a>
+                                                </div>
                                             </div>
-                                            <div class="col">
-                                                <a href="#" class="btn btn-outline-secondary text-center"><i
-                                                        class="fas fa-trash-alt"></i></a>
-                                            </div>
-                                        </div>
-                                    </td>
-                                </tr>
-                                {% endfor %}
-                            </tbody>
-                            <tfoot>
-                                <tr>
-                                    <th class="text-center"></th>
-                                    <th>Product ID</th>
-                                    <th>Product Name</th>
-                                    <th>Product Category</th>
-                                    <th>Price</th>
-                                    <th>Action</th>
-                                </tr>
-                            </tfoot>
-                        </table>
+                                        </td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <th class="text-center"></th>
+                                        <th>Product ID</th>
+                                        <th>Product Name</th>
+                                        <th>Product Category</th>
+                                        <th>Price</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </section>

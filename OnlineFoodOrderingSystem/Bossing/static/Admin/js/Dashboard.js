@@ -3,12 +3,17 @@ var dt = $('#dataTable').DataTable({
         "sLengthMenu": "Show Entries _MENU_",
     },
     dom: "<'row d-flex flex-row align-items-end'>tr<'row d-flex flex-row align-items-end'<'col-md-6'l><'col-sm-2'i><'col-md-4'p>>",
+    "lengthMenu": [5,10, 25, 50,],
     "pageLength": 5,
     "order": [],
     "columnDefs": [{
         "targets": 0,
         "orderable": false,
         "className": "text-center select-checkbox",
+    },{
+        "targets": 8,
+        "orderable": false,
+        width: 100,
     }],
     select: {
         style: 'multi',
@@ -27,12 +32,17 @@ var dt1 = $('#dataTable1').DataTable({
         "sLengthMenu": "Show Entries _MENU_",
     },
     dom: "<'row d-flex flex-row align-items-end'>tr<'row d-flex flex-row align-items-end'<'col-md-6'l><'col-sm-2'i><'col-md-4'p>>",
+    "lengthMenu": [5,10, 25, 50,],
     "pageLength": 5,
     "order": [],
     "columnDefs": [{
         "targets": 0,
         "orderable": false,
-        "className": "text-center select-checkbox",
+        "className": "select-checkbox",
+    },{
+        "targets": 5,
+        "orderable": false,
+        width: 100,
     }],
     select: {
         style: 'multi',
