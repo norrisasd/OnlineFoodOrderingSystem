@@ -2,7 +2,7 @@ var dt = $('#dataTable').DataTable({
     "oLanguage": {
         "sLengthMenu": "Show Entries _MENU_",
     },
-    dom: "<'row d-flex flex-row align-items-end'>tr<'row d-flex flex-row align-items-end'<'col-md-6'l><'col-sm-2'i><'col-md-4'p>>",
+    dom: "<'row d-flex flex-row align-items-end'>tr<'row d-flex flex-row align-items-end'<'col-auto'l><'col-md-8'i><'col-md-2'p>>",
     "lengthMenu": [5,10, 25, 50,],
     "pageLength": 5,
     "order": [],
@@ -13,6 +13,7 @@ var dt = $('#dataTable').DataTable({
     },{
         "targets": 8,
         "orderable": false,
+        "className": "text-center",
         width: 100,
     }],
     select: {
@@ -31,7 +32,7 @@ var dt1 = $('#dataTable1').DataTable({
     "oLanguage": {
         "sLengthMenu": "Show Entries _MENU_",
     },
-    dom: "<'row d-flex flex-row align-items-end'>tr<'row d-flex flex-row align-items-end'<'col-md-6'l><'col-sm-2'i><'col-md-4'p>>",
+    dom: "<'row d-flex flex-row align-items-end'>tr<'row d-flex flex-row align-items-end'<'col-auto'l><'col-md-8'i><'col-md-2'p>>",
     "lengthMenu": [5,10, 25, 50,],
     "pageLength": 5,
     "order": [],
@@ -42,6 +43,7 @@ var dt1 = $('#dataTable1').DataTable({
     },{
         "targets": 5,
         "orderable": false,
+        "className": "text-center",
         width: 100,
     }],
     select: {
@@ -83,3 +85,7 @@ var dt1 = $('#dataTable1').DataTable({
 //         },
 //     }]
 // }).container().appendTo('#beforeLD1');
+function hideAll(){
+    w3.hide('#UserTable');
+    w3.hide('#ProductTable');
+}

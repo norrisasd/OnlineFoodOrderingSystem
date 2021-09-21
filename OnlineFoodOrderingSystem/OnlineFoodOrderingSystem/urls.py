@@ -31,5 +31,4 @@ urlpatterns = [
     path('login',views.LoginView.as_view(),name ="login_view"),
     path('signup',views.SignupView.as_view(),name ="signup_view"),
     path('dashboard',views.DashboardView.as_view(),name ="dashboard_view"),
-    path('tryasd',views.TryView.as_view(),name ="tryasdasd"),
 ]
