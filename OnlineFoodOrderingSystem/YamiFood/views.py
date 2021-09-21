@@ -43,9 +43,13 @@ class DashboardView(View):
     def get(self,request):
         users = User.objects.all()
         products = Product.objects.all()
+        orders = Order.objects.all()
+        deliveries = Delivery.objects.all()
         context = {
             'users': users,
             'products': products,
+            'orders': orders,
+            'deliveries': deliveries
         }
         return render(request,'./pages/dashboard.html', context)
         
