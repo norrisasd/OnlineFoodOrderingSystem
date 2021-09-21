@@ -43,13 +43,15 @@
 				</div>
 				<div class="col">
 					<a href="" class="h3 text-dark"
-						onclick="hideAll();w3.show('#ProductTable');return false;">Products</a>
+						onclick="hideAll();w3.show('#ProductTable');return false;">Product</a>
 				</div>
 				<div class="col">
-					<a href="" class="h3 text-dark" onclick="return false;">table</a>
+					<a href="" class="h3 text-dark" 
+					onclick="hideAll();w3.show('#OrderTable');return false;">Order</a>
 				</div>
 				<div class="col">
-					<a href="" class="h3 text-dark" onclick="return false;">table</a>
+					<a href="" class="h3 text-dark" 
+					onclick="hideAll();w3.show('#DeliveryTable');return false;">Delivery</a>
 				</div>
 			</div>
 			<div class="row">
@@ -183,6 +185,128 @@
 									<th>Product Name</th>
 									<th>Product Category</th>
 									<th>Price</th>
+									<th>Action</th>
+								</tr>
+							</tfoot>
+						</table>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+
+			</div>
+		</div>
+	</div>
+	<div class="stuff-box" id="OrderTable" style="display:none">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-12">
+					<div class="heading-title text-center">
+						<h2>Order</h2>
+						<table id="dataTable2" class="table table-borderless table-hover">
+							<thead class="thead-dark">
+								<tr>
+									<th class=" text-center"><input type="checkbox" onchange="
+										if(this.checked)
+											dt1.rows().select();
+										else
+											dt1.rows().deselect();
+									"></th>
+									<th>Order ID</th>
+									<th>Date Ordered</th>
+									<th>Total Price</th>
+									<th>User ID</th>
+									<th>Action</th>
+								</tr>
+							</thead>
+							<tbody>
+								{% for order in orders %}
+								<tr>
+									<td></td>
+									<td>{{order.order_id}}</td>
+									<td>{{order.date_ordered}}</td>
+									<td>{{order.total_price}}</td>
+									<td>{{order.user_id}}</td>
+									<td>
+										<div class="row text-center">
+											<div class="col-sm">
+												<a class="btn btn-outline-secondary text-center" href="#"><i
+														class="fas fa-edit"></i></a>
+											</div>
+											<div class="col">
+												<a href="#" class="btn btn-outline-secondary text-center"><i
+														class="fas fa-trash-alt"></i></a>
+											</div>
+										</div>
+									</td>
+								</tr>
+								{% endfor %}
+							</tbody>
+							<tfoot>
+								<tr>
+									<th class="text-center"></th>
+									<th>Order ID</th>
+									<th>Date Ordered</th>
+									<th>Total Price</th>
+									<th>User ID</th>
+									<th>Action</th>
+								</tr>
+							</tfoot>
+						</table>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+
+			</div>
+		</div>
+	</div>
+	<div class="stuff-box" id="DeliveryTable" style="display:none">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-12">
+					<div class="heading-title text-center">
+						<h2>Delivery</h2>
+						<table id="dataTable3" class="table table-borderless table-hover">
+							<thead class="thead-dark">
+								<tr>
+									<th class=" text-center"><input type="checkbox" onchange="
+										if(this.checked)
+											dt1.rows().select();
+										else
+											dt1.rows().deselect();
+									"></th>
+									<th>Delivery ID</th>
+									<th>Delivery Carrier</th>
+									<th>Action</th>
+								</tr>
+							</thead>
+							<tbody>
+								{% for delivery in deliveries %}
+								<tr>
+									<td></td>
+									<td>{{delivery.delivery_id}}</td>
+									<td>{{delivery.delivery_carrier}}</td>
+									<td>
+										<div class="row text-center">
+											<div class="col-sm">
+												<a class="btn btn-outline-secondary text-center" href="#"><i
+														class="fas fa-edit"></i></a>
+											</div>
+											<div class="col">
+												<a href="#" class="btn btn-outline-secondary text-center"><i
+														class="fas fa-trash-alt"></i></a>
+											</div>
+										</div>
+									</td>
+								</tr>
+								{% endfor %}
+							</tbody>
+							<tfoot>
+								<tr>
+									<th class="text-center"></th>
+									<th>Delivery ID</th>
+									<th>Delivery Carrier</th>
 									<th>Action</th>
 								</tr>
 							</tfoot>
