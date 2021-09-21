@@ -17,9 +17,9 @@ class ContactView(View):
     def get(self,request):
         return render(request,'./pages/contact.html',{'nbar':'contact'})
 
-class MenuView(View):
+class OrderView(View):
     def get(self,request):
-        return render(request,'./pages/menu.html',{'nbar':'menu'})
+        return render(request,'./pages/menu.html',{'nbar':'order'})
 
 class FeaturesView(View):
     def get(self,request):
@@ -35,8 +35,8 @@ class SignupView(View):
 
     def post(self, request):
         form= UserForm(request.POST)
-        if form.is_valid():
-            print("keke",request.POST)
+        #if form.is_valid():
+         #   print("keke",request.POST)
         return redirect('./login')
 
 class DashboardView(View):
