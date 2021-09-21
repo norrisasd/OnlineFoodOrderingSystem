@@ -15,10 +15,10 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from Bossing import views
+from YamiFood import views
 from django.views.generic.base import RedirectView
 
-app_name='Bossing'
+app_name='YamiFood'
 
 urlpatterns = [
     path('',RedirectView.as_view(url='home', permanent=False), name='index_view'),
