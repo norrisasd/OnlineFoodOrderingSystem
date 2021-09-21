@@ -28,19 +28,31 @@
                                 <h5><b>Sign-up</b></h5>
                             </div>
                             <div class="form-label-group mb-3">
-                                <input type="text" class="form-control" id="username" placeholder="Username">
+                                <input type="text" class="form-control" name="username"  placeholder="Username">
                                 <label for="username">Username</label>
                             </div>
                             <div class="form-label-group mb-3">
-                                <input type="password" class="form-control" id="password" placeholder="Password">
+                                <input type="password" class="form-control" name="password" id="password" placeholder="Password">
                                 <label for="password">Password</label>
                             </div>
                             <div class="form-label-group mb-3">
-                                <input type="password" class="form-control" id="password" placeholder="Password">
+                                <input type="password" class="form-control" id="password" oninput="checkPassword(this.value)" placeholder="Password">
                                 <label for="password">Confirm Password</label>
                             </div>
                             <div class="form-label-group mb-3">
-                                <input type="email" class="form-control" id="password" placeholder="Email">
+                                <input type="text" class="form-control" name="first_name" placeholder="Firstname">
+                                <label for="Firstname">Firstname</label>
+                            </div>
+                            <div class="form-label-group mb-3">
+                                <input type="text" class="form-control" name="last_name" placeholder="Lastname">
+                                <label for="Firstname">Lastname</label>
+                            </div>
+                            <div class="form-label-group mb-3">
+                                <input type="text" class="form-control" name="phone_number" placeholder="Lastname">
+                                <label for="Firstname">Phone Number</label>
+                            </div>
+                            <div class="form-label-group mb-3">
+                                <input type="email" class="form-control" name="email" placeholder="Email">
                                 <label for="password">Email</label>
                             </div>
 
@@ -48,7 +60,7 @@
                                 <span><a href="home" style="color:#343a40">Home</a> | <a href="login" style="color:#343a40">Login</a></span>
                             </div>
                             <div class="form-group d-grid">
-                                <input class="form-control btn btn-primary btn-dark" type="submit" name="submit">
+                                <input class="form-control btn btn-primary btn-dark" type="submit" id="btnSubmit" name="submit" disabled>
                             </div>
                         </form>
                     </div>
@@ -58,65 +70,9 @@
 
     </div>
 
-    <!-- MODAL -->
 
-    <div class="modal fade" id="emailSending" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Verify Email</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <form id="emailVerificationForm">
-                        <div class="form-group">
-                            <label for="verUsername"><b>Username</b></label>
-                            <input type="text" class="form-control" id="verUsername" placeholder="Enter Username">
-                        </div>
-                        <div class="form-group">
-                            <label for="email"><b>Email address</b></label>
-                            <input type="email" class="form-control" id="email" placeholder="Enter email">
-                            <button type="button" class="btn btn-outline-primary btn-sm float-right" id="vfBtn" style="margin:2%">Check Email</button>
-                        </div>
-                        <br>
-                        <div class="form-group">
-                            <label for="code"><b>Email Verification Code (6 digits)</b></label>
-                            <input type="number" class="form-control" id="code" placeholder="123456" min="100000" max="999999">
-                            <button type="button" class="btn btn-outline-primary btn-sm float-right" id="cdBtn" style="margin:2%" disabled>Send Code</button>
-                        </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary" id="submitBtn" value="">Verify</button>
-                </div>
-                </form>
-            </div>
-        </div>
-    </div>
 
-    <div class="modal fade" id="changePass" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-body">
-                    Change Password
-                    <div class="form-group">
-                        <label for="exampleInputEmail1">New Password</label>
-                        <input type="password" class="form-control" id="changePassw" placeholder="Enter Username">
-                    </div>
-                    <div class="form-group">
-                        <label for="exampleInputEmail1">Confrim Password</label>
-                        <input type="password" class="form-control" id="confirmChangePass" placeholder="Enter Username">
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary" id="changeBtn">Change Password</button>
-                </div>
-            </div>
-        </div>
-    </div>
+
 </body>
 {% endblock content %}
 {% block footerinclude %}
@@ -125,4 +81,5 @@
 <!-- Bootstrap 4 -->
 <script src="{% static 'plugins/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
 <script src="{% static 'plugins/toastr/toastr.min.js' %}"></script>
+<script src="{% static 'js/Signup.js' %}"></script>
 {% endblock footerinclude %}

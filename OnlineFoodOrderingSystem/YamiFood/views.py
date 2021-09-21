@@ -19,7 +19,8 @@ class ContactView(View):
 
 class OrderView(View):
     def get(self,request):
-        return render(request,'./pages/menu.html',{'nbar':'order'})
+        products = Product.objects.all()
+        return render(request,'./pages/menu.html',{'nbar':'order','products':products})
 
 class FeaturesView(View):
     def get(self,request):
@@ -42,7 +43,7 @@ class SignupView(View):
             last_name = request.POST.get("last_name")
             phone_number = request.POST.get("phone_number")
         form = User(username = username, password = password, first_name = first_name, last_name = last_name, 
-                    phone_number = phone_number)
+                    phone_number = phone_number, is_admin = 2)
         form.save()
         return redirect('./login')
 
