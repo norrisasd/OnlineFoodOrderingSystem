@@ -4,7 +4,7 @@ from .models import *
 class UserForm(forms.ModelForm):
     class Meta:
         model = User
-        fields = '__all__'
+        fields = ('username','password','first_name','lastname','phone_number')
 
 class ProductForm(forms.ModelForm):
     class Meta:
