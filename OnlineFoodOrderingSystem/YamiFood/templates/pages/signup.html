@@ -22,7 +22,8 @@
             <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
                 <div class="card border-0 shadow rounded-3 my-5">
                     <div class="card-body p-4 p-sm-5">
-                        <form class="form-signin" role="form" action="" method="get" onsubmit="return setLogin();">
+                        <form class="form-signin" action="" method="post">
+                            {% csrf_token %}
                             <div class="form-label-group">
                                 <h5><b>Sign-up</b></h5>
                             </div>
@@ -47,7 +48,7 @@
                                 <span><a href="home" style="color:#343a40">Home</a> | <a href="login" style="color:#343a40">Login</a></span>
                             </div>
                             <div class="form-group d-grid">
-                                <input class="form-control btn btn-primary btn-dark" type="submit" value="Login" name="login">
+                                <input class="form-control btn btn-primary btn-dark" type="submit" name="submit">
                             </div>
                         </form>
                     </div>
