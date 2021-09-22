@@ -59,5 +59,4 @@ class DashboardView(View):
             'orders': orders,
             'deliveries': deliveries
         }
-        return render(request,'./pages/dashboard.html', context)
-        
+        return render(request,'./pages/dashboard.html', context)  
