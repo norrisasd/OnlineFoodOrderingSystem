@@ -17,7 +17,8 @@ from django.contrib import admin
 from django.urls import path
 from YamiFood import views
 from django.views.generic.base import RedirectView
-
+from django.conf import settings
+from django.conf.urls.static import static
 app_name='YamiFood'
 
 urlpatterns = [
@@ -31,4 +32,7 @@ urlpatterns = [
     path('login',views.LoginView.as_view(),name ="login_view"),
     path('signup',views.SignupView.as_view(),name ="signup_view"),
     path('dashboard',views.DashboardView.as_view(),name ="dashboard_view"),
+    
 ]
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

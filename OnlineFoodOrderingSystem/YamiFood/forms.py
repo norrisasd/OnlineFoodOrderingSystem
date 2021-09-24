@@ -9,5 +9,5 @@ class UserForm(forms.ModelForm):
 class ProductForm(forms.ModelForm):
     class Meta:
         model = Product
-        fields = '__all__'
+        fields = ('product_name','product_category','product_picture','price')
 

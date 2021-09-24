@@ -1,0 +1,39 @@
+<div class="modal fade" id="productModal" tabindex="-1" role="dialog" aria-labelledby="modalTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title" id="modalTitle">Add Product</h1>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form method="POST" onsubmit="return addProduct(this);" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <input type="text" class="form-control" name="product_name" placeholder="Product Name">
+                    </div>
+                    <div class="form-group">
+                        <select class="form-control" name="category" id="product_category">
+                            <option value="" selected hidden>Product Category</option>
+                            <option value="Food">Food</option>
+                            <option value="Beverage">Beverage</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" class="form-control" name="price" placeholder="Price">
+                    </div>
+                    <div class="form-group">
+                        <input type="file" class="form-control-file" name="product_picture" id="product_picture"
+                            placeholder="Picture" accept="image/*">
+                    </div>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" onclick="refreshTable()">Close</button>
+                <button type="submit" class="btn btn-primary" name="add_product" value="add_product">Add</button>
+            </div>
+            </form>
+        </div>
+    </div>
+</div>

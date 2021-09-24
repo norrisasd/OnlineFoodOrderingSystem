@@ -38,20 +38,18 @@
 		<div class="container text-center">
 			<div class="row" id="NavTable">
 				<div class="col">
-					<a href="#UserTable" class="h3 text-dark"
-						onclick="hideAll();w3.show('#UserTable');return false;">User</a>
+					<a href="" class="h3 text-dark" onclick="hideAll();w3.show('#UserTable');return false;">User</a>
 				</div>
 				<div class="col">
 					<a href="" class="h3 text-dark"
 						onclick="hideAll();w3.show('#ProductTable');return false;">Product</a>
 				</div>
 				<div class="col">
-					<a href="" class="h3 text-dark" 
-					onclick="hideAll();w3.show('#OrderTable');return false;">Order</a>
+					<a href="" class="h3 text-dark" onclick="hideAll();w3.show('#OrderTable');return false;">Order</a>
 				</div>
 				<div class="col">
-					<a href="" class="h3 text-dark" 
-					onclick="hideAll();w3.show('#DeliveryTable');return false;">Delivery</a>
+					<a href="" class="h3 text-dark"
+						onclick="hideAll();w3.show('#DeliveryTable');return false;">Delivery</a>
 				</div>
 			</div>
 			<div class="row">
@@ -66,9 +64,9 @@
 				<div class="col-lg-12">
 					<div class="heading-title text-center">
 						<h2>User</h2>
-						<div class="text-right"> 
-							<a class="btn btn-dark text-right" href="signup"><i 
-								class="fas fa-plus"></i>&nbsp Add User</a>
+						<div class="text-right">
+							<a class="btn btn-dark text-right" href="signup"><i class="fas fa-plus"></i>&nbsp Add
+								User</a>
 						</div>
 						<table id="dataTable" class="table table-borderless table-hover">
 							<thead class="thead-dark">
@@ -101,16 +99,8 @@
 									<td>{{user.phone_number}}</td>
 									<td>{% if user.is_admin == 1 %}Admin{% else %}User{% endif %}</td>
 									<td>
-										<div class="row text-center">
-											<div class="col">
-												<a class="btn btn-outline-secondary text-center" href="#"><i
-														class="fas fa-edit"></i></a>
-											</div>
-											<div class="col">
-												<a href="#" class="btn btn-outline-secondary text-center"><i
-														class="fas fa-trash-alt"></i></a>
-											</div>
-										</div>
+										<a class="btn btn-outline-secondary text-center" style="padding-left:15px;padding-right: 15px;" href="#"><i
+											class="fas fa-eye"></i></a>
 									</td>
 								</tr>
 								{% endfor %}
@@ -145,40 +135,12 @@
 						<h2>Product</h2>
 						<!-- Button trigger modal -->
 						<div class="text-right">
-							<button type="button" class="btn btn-dark"data-toggle="modal" data-target="#productModal">
+							<button type="button" class="btn btn-dark" data-toggle="modal" data-target="#productModal">
 								<i class="fas fa-plus"></i>&nbsp Add Product
 							</button>
 						</div>
 						<!-- Modal -->
-						<div class="modal fade" id="productModal" tabindex="-1" role="dialog" aria-labelledby="modalTitle" aria-hidden="true">
-							<div class="modal-dialog modal-dialog-centered" role="document">
-							<div class="modal-content">
-								<div class="modal-header">
-								<h1 class="modal-title" id="modalTitle">Add Product</h1>
-								<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-									<span aria-hidden="true">&times;</span>
-								</button>
-								</div>
-								<div class="modal-body" >
-									<form>
-										<div class="form-group">
-										  <input type="text" class="form-control" id="product_name" placeholder="Product Name">
-										</div>
-										<div class="form-group">
-										  <input type="text" class="form-control" id="product_category" placeholder="Category">
-										</div>
-										<div class="form-group">
-											<input type="text" class="form-control" id="price" placeholder="Price">
-										  </div>
-									  </form>
-								</div>
-								<div class="modal-footer">
-								<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-								<button type="submit" class="btn btn-primary">Add</button>
-								</div>
-							</div>
-							</div>
-						</div>
+						{% include "../components/addproduct-modal.html" %}
 						<table id="dataTable1" class="table table-borderless table-hover">
 							<thead class="thead-dark">
 								<tr>
@@ -195,7 +157,7 @@
 									<th>Action</th>
 								</tr>
 							</thead>
-							<tbody>
+							<tbody id="tbl_product">
 								{% for product in products %}
 								<tr>
 									<td></td>
@@ -204,16 +166,8 @@
 									<td>{{product.product_category}}</td>
 									<td>{{product.price}}</td>
 									<td>
-										<div class="row text-center">
-											<div class="col-sm">
-												<a class="btn btn-outline-secondary text-center" href="#"><i
-														class="fas fa-edit"></i></a>
-											</div>
-											<div class="col">
-												<a href="#" class="btn btn-outline-secondary text-center"><i
-														class="fas fa-trash-alt"></i></a>
-											</div>
-										</div>
+										<a class="btn btn-outline-secondary text-center" style="padding-left:15px;padding-right: 15px;" href="#"><i
+												class="fas fa-eye"></i></a>
 									</td>
 								</tr>
 								{% endfor %}
@@ -361,66 +315,35 @@
 	</div>
 	<!-- End Stuff -->
 
-	<!-- Start Customer Reviews -->
-	<!-- <div class="customer-reviews-box">
-		<div class="container">
-			<div class="row">
-				<div class="col-lg-12">
-					<div class="heading-title text-center">
-						<h2>Customer Reviews</h2>
-						<p>Lorem Ipsum is simply dummy text of the printing and typesetting</p>
-					</div>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-md-8 mr-auto ml-auto text-center">
-					<div id="reviews" class="carousel slide" data-ride="carousel">
-						<div class="carousel-inner mt-4">
-							<div class="carousel-item text-center active">
-								<div class="img-box p-1 border rounded-circle m-auto">
-									<img class="d-block w-100 rounded-circle" src="{% static 'images/profile-1.jpg' %}" alt="">
-								</div>
-								<h5 class="mt-4 mb-0"><strong class="text-warning text-uppercase">Paul Mitchel</strong></h5>
-								<h6 class="text-dark m-0">Web Developer</h6>
-								<p class="m-0 pt-3">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam eu sem tempor, varius quam at, luctus dui. Mauris magna metus, dapibus nec turpis vel, semper malesuada ante. Idac bibendum scelerisque non non purus. Suspendisse varius nibh non aliquet.</p>
-							</div>
-							<div class="carousel-item text-center">
-								<div class="img-box p-1 border rounded-circle m-auto">
-									<img class="d-block w-100 rounded-circle" src="{% static 'images/profile-3.jpg' %}" alt="">
-								</div>
-								<h5 class="mt-4 mb-0"><strong class="text-warning text-uppercase">Steve Fonsi</strong></h5>
-								<h6 class="text-dark m-0">Web Designer</h6>
-								<p class="m-0 pt-3">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam eu sem tempor, varius quam at, luctus dui. Mauris magna metus, dapibus nec turpis vel, semper malesuada ante. Idac bibendum scelerisque non non purus. Suspendisse varius nibh non aliquet.</p>
-							</div>
-							<div class="carousel-item text-center">
-								<div class="img-box p-1 border rounded-circle m-auto">
-									<img class="d-block w-100 rounded-circle" src="{% static 'images/profile-7.jpg' %}" alt="">
-								</div>
-								<h5 class="mt-4 mb-0"><strong class="text-warning text-uppercase">Daniel vebar</strong></h5>
-								<h6 class="text-dark m-0">Seo Analyst</h6>
-								<p class="m-0 pt-3">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam eu sem tempor, varius quam at, luctus dui. Mauris magna metus, dapibus nec turpis vel, semper malesuada ante. Idac bibendum scelerisque non non purus. Suspendisse varius nibh non aliquet.</p>
-							</div>
-						</div>
-						<a class="carousel-control-prev" href="#reviews" role="button" data-slide="prev">
-							<i class="fa fa-angle-left" aria-hidden="true"></i>
-							<span class="sr-only">Previous</span>
-						</a>
-						<a class="carousel-control-next" href="#reviews" role="button" data-slide="next">
-							<i class="fa fa-angle-right" aria-hidden="true"></i>
-							<span class="sr-only">Next</span>
-						</a>
-                    </div>
-				</div>
-			</div>
-		</div>
-	</div> -->
-	<!-- End Customer Reviews -->
 
 	<!-- Start Footer -->
 	{% include "../components/footer.html" %}
 	<!-- End Footer -->
 
 	<a href="#" id="back-to-top" title="Back to top" style="display: none;">&uarr;</a>
+	<script>
+		function addProduct(data){
+			$.ajax({
+                type: 'post',
+                url: '',
+                data: new FormData(data),
+                contentType: false,
+                cache: false,
+                processData: false,
+                success: function(response) {
+                    if (response.status) {
+                        toastr.success("Product Added");
+						$(".modal").modal("hide");
+						refreshTable();
+					}
+                }
+            });
+			return false;
+		}
+		function refreshTable(){
+			
+		}
+	</script>
 </body>
 {% endblock content %}
 

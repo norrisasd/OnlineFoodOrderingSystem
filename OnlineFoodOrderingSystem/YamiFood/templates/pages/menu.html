@@ -35,212 +35,33 @@
 					<div class="special-menu text-center">
 						<div class="button-group filter-button-group">
 							<button class="active" data-filter="*">All</button>
-							<button data-filter=".drinks">Drinks</button>
+							<button data-filter=".beverage">Drinks</button>
 							<button data-filter=".food">Lunch</button>
 							<button data-filter=".dinner">Dinner</button>
 						</div>
 					</div>
 				</div>
 			</div>
-
+				
 			<div class="row special-list">
-				<div class="col-lg-4 col-md-6 special-grid drinks">
+				{% for product in products %}
+				<div class="col-lg-4 col-md-6 special-grid {{product.product_category}}">
 					<div class="gallery-single fix">
-						<img src="{% static 'images/img-01.jpg' %}" class="img-fluid" alt="Image">
+						<img src="{% static 'ProductPicture/' %}{{product.product_picture}}" class="img-fluid" style="width:800px;height:200px" alt="Image">
 						<div class="why-text text-center">
-							<h4>Special Drinks 1</h4>
-							<p>Sed id magna vitae eros sagittis euismod.</p>
-							<h5> $9.79</h5>
+							<h4>{{product.product_name}}</h4>
+							<p>{{product.price}}</p>
+							
 							<div class="row">
 								<div class="col">
-									<a href="" onclick="return false;" class="h5 text-dark "><i class="fa fa-minus" aria-hidden="true"></i></a>
-								</div>
-								<div class="col">
-									<h4>0</h4>
-								</div>
-								<div class="col">
-									<a href="" onclick="return false;" class="h5 text-dark "><i class="fa fa-plus" aria-hidden="true"></i></a>
+									<a href="" onclick='setOrderModal("{{product.price}}","{{product.product_name}}","{{product.product_category}}");return false;' class="btn btn-outline-dark">Order</a>
 								</div>
 							</div>
 						</div>
 					</div>
 				</div>
-
-				<div class="col-lg-4 col-md-6 special-grid drinks">
-					<div class="gallery-single fix">
-						<img src="{% static 'images/img-02.jpg' %}" class="img-fluid" alt="Image">
-						<div class="why-text text-center">
-							<h4>Special Drinks 2</h4>
-							<p>Sed id magna vitae eros sagittis euismod.</p>
-							<h5> $9.79</h5>
-							<div class="row">
-								<div class="col">
-									<a href="" onclick="return false;" class="h5 text-dark "><i class="fa fa-minus" aria-hidden="true"></i></a>
-								</div>
-								<div class="col">
-									<h4>0</h4>
-								</div>
-								<div class="col">
-									<a href="" onclick="return false;" class="h5 text-dark "><i class="fa fa-plus" aria-hidden="true"></i></a>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-
-				<div class="col-lg-4 col-md-6 special-grid drinks">
-					<div class="gallery-single fix">
-						<img src="{% static 'images/img-03.jpg' %}" class="img-fluid" alt="Image">
-						<div class="why-text text-center">
-							<h4>Special Drinks 3</h4>
-							<p>Sed id magna vitae eros sagittis euismod.</p>
-							<h5> $9.79</h5>
-							<div class="row">
-								<div class="col">
-									<a href="" onclick="return false;" class="h5 text-dark "><i class="fa fa-minus" aria-hidden="true"></i></a>
-								</div>
-								<div class="col">
-									<h4>0</h4>
-								</div>
-								<div class="col">
-									<a href="" onclick="return false;" class="h5 text-dark "><i class="fa fa-plus" aria-hidden="true"></i></a>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-
-				<div class="col-lg-4 col-md-6 special-grid food">
-					<div class="gallery-single fix">
-						<img src="{% static 'images/img-04.jpg' %}" class="img-fluid" alt="Image">
-						<div class="why-text text-center">
-							<h4>Food 1</h4>
-							<p>Sed id magna vitae eros sagittis euismod.</p>
-							<h5> $9.79</h5>
-							<div class="row">
-								<div class="col">
-									<a href="" onclick="return false;" class="h5 text-dark "><i class="fa fa-minus" aria-hidden="true"></i></a>
-								</div>
-								<div class="col">
-									<h4>0</h4>
-								</div>
-								<div class="col">
-									<a href="" onclick="return false;" class="h5 text-dark "><i class="fa fa-plus" aria-hidden="true"></i></a>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-
-				<div class="col-lg-4 col-md-6 special-grid food">
-					<div class="gallery-single fix">
-						<img src="{% static 'images/img-05.jpg' %}" class="img-fluid" alt="Image">
-						<div class="why-text text-center">
-							<h4>Food 2</h4>
-							<p>Sed id magna vitae eros sagittis euismod.</p>
-							<h5> $9.79</h5>
-							<div class="row">
-								<div class="col">
-									<a href="" onclick="return false;" class="h5 text-dark "><i class="fa fa-minus" aria-hidden="true"></i></a>
-								</div>
-								<div class="col">
-									<h4>0</h4>
-								</div>
-								<div class="col">
-									<a href="" onclick="return false;" class="h5 text-dark "><i class="fa fa-plus" aria-hidden="true"></i></a>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-
-				<div class="col-lg-4 col-md-6 special-grid food">
-					<div class="gallery-single fix">
-						<img src="{% static 'images/img-06.jpg' %}" class="img-fluid" alt="Image">
-						<div class="why-text text-center">
-							<h4>Food 3</h4>
-							<p>Sed id magna vitae eros sagittis euismod.</p>
-							<h5> $9.79</h5>
-							<div class="row">
-								<div class="col">
-									<a href="" onclick="return false;" class="h5 text-dark "><i class="fa fa-minus" aria-hidden="true"></i></a>
-								</div>
-								<div class="col">
-									<h4>0</h4>
-								</div>
-								<div class="col">
-									<a href="" onclick="return false;" class="h5 text-dark "><i class="fa fa-plus" aria-hidden="true"></i></a>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-
-				<div class="col-lg-4 col-md-6 special-grid dinner">
-					<div class="gallery-single fix">
-						<img src="{% static 'images/img-07.jpg' %}" class="img-fluid" alt="Image">
-						<div class="why-text text-center">
-							<h4>Special Drinks 2</h4>
-							<p>Sed id magna vitae eros sagittis euismod.</p>
-							<h5> $9.79</h5>
-							<div class="row">
-								<div class="col">
-									<a href="" onclick="return false;" class="h5 text-dark "><i class="fa fa-minus" aria-hidden="true"></i></a>
-								</div>
-								<div class="col">
-									<h4>0</h4>
-								</div>
-								<div class="col">
-									<a href="" onclick="return false;" class="h5 text-dark "><i class="fa fa-plus" aria-hidden="true"></i></a>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-
-				<div class="col-lg-4 col-md-6 special-grid dinner">
-					<div class="gallery-single fix">
-						<img src="{% static 'images/img-08.jpg' %}" class="img-fluid" alt="Image">
-						<div class="why-text text-center">
-							<h4>Special Drinks 2</h4>
-							<p>Sed id magna vitae eros sagittis euismod.</p>
-							<h5> $9.79</h5>
-							<div class="row">
-								<div class="col">
-									<a href="" onclick="return false;" class="h5 text-dark "><i class="fa fa-minus" aria-hidden="true"></i></a>
-								</div>
-								<div class="col">
-									<h4>0</h4>
-								</div>
-								<div class="col">
-									<a href="" onclick="return false;" class="h5 text-dark "><i class="fa fa-plus" aria-hidden="true"></i></a>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-
-				<div class="col-lg-4 col-md-6 special-grid dinner">
-					<div class="gallery-single fix">
-						<img src="{% static 'images/img-09.jpg' %}" class="img-fluid" alt="Image">
-						<div class="why-text text-center">
-							<h4>Special Drinks 2</h4>
-							<p>Sed id magna vitae eros sagittis euismod.</p>
-							<h5> $9.79</h5>
-							<div class="row">
-								<div class="col">
-									<a href="" onclick="return false;" class="h5 text-dark "><i class="fa fa-minus" aria-hidden="true"></i></a>
-								</div>
-								<div class="col">
-									<h4>0</h4>
-								</div>
-								<div class="col">
-									<a href="" onclick="return false;" class="h5 text-dark "><i class="fa fa-plus" aria-hidden="true"></i></a>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
+				{% endfor %}
+				
 
 			</div>
 		</div>
@@ -334,6 +155,11 @@
 	<!-- End Footer -->
 
 	<a href="#" id="back-to-top" title="Back to top" style="display: none;">&uarr;</a>
+	<script>
+		function setOrderModal(product){
+			alert(product);
+		}
+	</script>
 </body>
 {% endblock content %}
 {% include "../templates/js.html" %}

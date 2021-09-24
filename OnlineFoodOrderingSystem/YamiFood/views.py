@@ -2,6 +2,8 @@ from django.shortcuts import redirect, render
 from django.views.generic import View
 from django.views.generic.base import RedirectView
 from .forms import *
+from django.core.files.storage import FileSystemStorage
+from django.http import JsonResponse
 
 # Create your views here.
 class IndexView(View):
@@ -36,16 +38,16 @@ class SignupView(View):
 
     def post(self, request):
         form = UserForm(request.POST)
-        if form.is_valid():
+        if form.is_valid() and request.POST.get("signup") == "register":
             username = request.POST.get("username")
             password = request.POST.get("password")
             first_name = request.POST.get("first_name")
             last_name = request.POST.get("last_name")
             phone_number = request.POST.get("phone_number")
         form = User(username = username, password = password, first_name = first_name, last_name = last_name, 
-                    phone_number = phone_number, is_admin = 2)
+                    phone_number = phone_number, is_admin = False)
         form.save()
-        return redirect('./login')
+        return redirect('./home')
 
 class DashboardView(View):
     def get(self,request):
@@ -57,6 +59,24 @@ class DashboardView(View):
             'users': users,
             'products': products,
             'orders': orders,
-            'deliveries': deliveries
+            'deliveries': deliveries,
+            'nbar':'dashboard'
         }
         return render(request,'./pages/dashboard.html', context)  
+
+    def post(self,request):
+        form = ProductForm(request.POST)
+        #Product Add
+        if request.is_ajax():
+            file = request.FILES["product_picture"]
+            name=request.POST.get("product_name")
+            category =request.POST.get("category")
+            price =request.POST.get("price")
+            picture =file.name
+            form = Product(product_name=name,product_category=category,product_picture=picture,price=price)
+            fs = FileSystemStorage()
+            fs.save(file.name,file)
+            form.save()
+            return JsonResponse({'status':True},status=200)
+        else:
+            return JsonResponse({'status':False},status=200)
