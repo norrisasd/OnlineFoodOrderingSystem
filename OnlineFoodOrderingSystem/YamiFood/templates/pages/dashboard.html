@@ -64,10 +64,14 @@
 				<div class="col-lg-12">
 					<div class="heading-title text-center">
 						<h2>User</h2>
+						<!-- Button trigger modal -->
 						<div class="text-right">
-							<a class="btn btn-dark text-right" href="signup"><i class="fas fa-plus"></i>&nbsp Add
-								User</a>
+							<button type="button" class="btn btn-dark" data-toggle="modal" data-target="#userModal">
+								<i class="fas fa-plus"></i>&nbsp Add Employee
+                        	</button>
 						</div>
+						<!-- Modal -->
+						{% include "../components/adduser-modal.html" %}
 						<table id="dataTable" class="table table-borderless table-hover">
 							<thead class="thead-dark">
 								<tr>
@@ -97,7 +101,7 @@
 									<td>{{user.first_name}}</td>
 									<td>{{user.last_name}}</td>
 									<td>{{user.phone_number}}</td>
-									<td>{% if user.is_admin == 1 %}Admin{% else %}User{% endif %}</td>
+									<td>{% if user.is_admin == 1 %}Employee{% else %}Customer{% endif %}</td>
 									<td>
 										<a class="btn btn-outline-secondary text-center" style="padding-left:15px;padding-right: 15px;" href="#"><i
 											class="fas fa-eye"></i></a>
@@ -197,12 +201,12 @@
 				<div class="col-lg-12">
 					<div class="heading-title text-center">
 						<h2>Order</h2>
-						<!-- Button trigger modal -->
+						{% comment %} <!-- Button trigger modal -->
 						<div class="text-right">
 							<button type="button" class="btn btn-dark">
 								<i class="fas fa-plus"></i>&nbsp Add Order
 							</button>
-						</div>
+						</div> {% endcomment %}
 						<table id="dataTable2" class="table table-borderless table-hover">
 							<thead class="thead-dark">
 								<tr>
@@ -269,10 +273,12 @@
 						<h2>Delivery</h2>
 						<!-- Button trigger modal -->
 						<div class="text-right">
-							<button type="button" class="btn btn-dark">
-								<i class="fas fa-plus"></i>&nbsp Add Delivery
-							</button>
+							<button type="button" class="btn btn-dark" data-toggle="modal" data-target="#carrierModal">
+								<i class="fas fa-plus"></i>&nbsp Add Carrier
+                        	</button>
 						</div>
+						<!-- Modal -->
+						{% include "../components/addcarrier-modal.html" %}
 						<table id="dataTable3" class="table table-borderless table-hover">
 							<thead class="thead-dark">
 								<tr>
