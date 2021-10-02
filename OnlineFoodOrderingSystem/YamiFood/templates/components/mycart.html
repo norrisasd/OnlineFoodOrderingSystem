@@ -1,0 +1,55 @@
+<!-- MY CART -->
+<div id="main">
+    <div id="mySidenav" class="sidenav">
+        <div id="mycart">
+            <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+                <li class="text-center h1">My Cart</li>
+            <ul id="cartlist">
+                {% for cart in carts %}
+                <li>
+                    <div class="row">
+                        <div class="col">
+                            <span>{{cart.product_id.product_name}}</span>
+                        </div>
+                        <div class="col-auto">
+                            <input type="number" class="form-control" min="0" max="50" value="{{cart.quantity}}"/>
+                        </div>
+                        <div class="col-auto"><a href="javascript:void(0)" class="text-secondary"
+                                style="padding:0;" onclick='removeItem("{{cart.product_id_id}}")'><span>&times;</span></a></div>
+                    </div>
+                </li>
+                {% endfor %}
+                <!-- <li>
+                    <div class="row">
+                        <div class="col">
+                            <span>Lumpia</span>
+                        </div>
+                        <div class="col-auto">
+                            <input type="number" class="form-control" min="0" max="50" />
+                        </div>
+                        <div class="col-auto"><a href="javascript:void(0)" class="text-secondary"
+                                style="padding:0;"><span>&times;</span></a></div>
+                    </div>
+                </li>
+                <li>
+                    <div class="row">
+                        <div class="col">
+                            <span>Chicken</span>
+                        </div>
+                        <div class="col-auto">
+                            <input type="number" class="form-control" min="0" max="50" />
+                        </div>
+                        <div class="col-auto">
+                            <a href="javascript:void(0)" class="text-secondary"
+                                style="padding:0;"><span>&times;</span></a>
+                        </div>
+                    </div>
+                </li> -->
+            </ul>
+
+            <div>
+                <a href="javascript:void(0)" onclick="refreshCart()" class="text-secondary text-center align-text-bottom"><b>CHECKOUT</b></a>
+            </div>
+        </div>
+    </div>
+</div>

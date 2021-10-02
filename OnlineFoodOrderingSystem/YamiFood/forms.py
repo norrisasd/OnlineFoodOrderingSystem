@@ -10,4 +10,7 @@ class ProductForm(forms.ModelForm):
     class Meta:
         model = Product
         fields = ('product_name','product_category','product_picture','price')
-
+class OrderDetailsForm(forms.ModelForm):
+    class Meta:
+        model = Order_Details
+        fields = ('quantity','order_id','product_id')

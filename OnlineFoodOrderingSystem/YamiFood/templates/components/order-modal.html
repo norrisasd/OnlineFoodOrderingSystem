@@ -8,7 +8,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form method="POST" onsubmit="return addProduct(this);" enctype="multipart/form-data">
+                <!-- <form method="POST" onsubmit="return addProduct(this);" enctype="multipart/form-data">
                     {% csrf_token %}
                     <div class="form-group">
                         <input type="text" class="form-control" name="product_name" placeholder="Product Name">
@@ -30,10 +30,10 @@
 
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-secondary" onclick="refreshTable()">Close</button>
                 <button type="submit" class="btn btn-primary" name="add_product" value="add_product">Add</button>
             </div>
-            </form>
+            </form> -->
         </div>
     </div>
 </div>

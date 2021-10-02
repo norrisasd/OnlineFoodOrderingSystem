@@ -29,6 +29,7 @@ class Order(models.Model):
     user_id = models.ForeignKey(User, on_delete=models.CASCADE)
     date_ordered = models.DateField(auto_now_add=True)
     total_price = models.FloatField()
+    status = models.BooleanField(default='0')
 
     class meta:
         db_table = 'order'
