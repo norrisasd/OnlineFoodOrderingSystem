@@ -184,6 +184,7 @@ function addProduct(data) {
                 toastr.success("Product Added");
                 $(".modal").modal("hide");
                 refreshTable();
+                $('#ProductForm').trigger("reset");
             }else{
                 toastr.error(response.status);
             }
@@ -191,7 +192,27 @@ function addProduct(data) {
     });
     return false;
 }
-
+function addEmployee(data){
+    $.ajax({
+        type: 'post',
+        url: '',
+        data: new FormData(data),
+        contentType: false,
+        cache: false,
+        processData: false,
+        success: function (response) {
+            if (response.status) {
+                toastr.success("Employee Added");
+                $(".modal").modal("hide");
+                refreshTable();
+                $('#EmployeeForm').trigger("reset");
+            }else{
+                toastr.error(response.status);
+            }
+        }
+    });
+    return false;
+}
 function addToCart(id){
     $.ajax({
         type:'post',
@@ -280,6 +301,14 @@ function refreshCart(){
             
         }
     });
+}
+function checkPassword(value){
+    pass = $("#password").val();
+    if(pass == value){
+        document.getElementById("btnAddEmployee").disabled = false;
+    }else{
+        document.getElementById("btnAddEmployee").disabled = true;
+    }
 }
 /* Set the width of the side navigation to 250px and the left margin of the page content to 250px and add a black background color to body */
 function openNav() {

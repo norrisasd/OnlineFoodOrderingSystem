@@ -8,8 +8,9 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form method="POST" onsubmit="return addProduct(this);" enctype="multipart/form-data">
+                <form method="POST" id="ProductForm" onsubmit="return addProduct(this);" enctype="multipart/form-data">
                     {% csrf_token %}
+                    <input type="text" name="request" value="addProduct" style="display:none">
                     <div class="form-group">
                         <input type="text" class="form-control" name="product_name" placeholder="Product Name">
                     </div>

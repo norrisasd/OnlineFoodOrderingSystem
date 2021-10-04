@@ -92,26 +92,29 @@ class DashboardView(View):
     def post(self,request):
         Pform = ProductForm(request.POST)
         Uform= UserForm(request.POST)
+        status = False
         #Product Add
-        if request.is_ajax():
-            if request.POST.get("product_name") != "":
-                file = request.FILES["product_picture"]
-                name=request.POST.get("product_name")
-                category =request.POST.get("category")
-                price =request.POST.get("price")
-                picture =file.name
-                Pform = Product(product_name=name,product_category=category,product_picture=picture,price=price)
-                fs = FileSystemStorage()
-                fs.save(file.name,file)
-                Pform.save()
-            elif request.POST.get("username") != "":
-                username = request.POST.get('username')
-                password = request.POST.get('password')
-                first_name = request.POST.get('first_name')
-                last_name = request.POST.get('last_name')
-                phone_number = request.POST.get('phone_number')
-                Uform = User(username = username, password = password, first_name = first_name, last_name = last_name, phone_number = phone_number, is_admin = True)
-                Uform.save()
-            return JsonResponse({'status':True},status=200)
-        else:
-            return JsonResponse({'status':False},status=200)
+
+        if request.POST.get('request') == "addEmployee":
+            username = request.POST.get('username')
+            password = request.POST.get('password')
+            first_name = request.POST.get('first_name')
+            last_name = request.POST.get('last_name')
+            phone_number = request.POST.get('phone_number')
+            Uform = User(username = username, password = password, first_name = first_name, last_name = last_name, phone_number = phone_number, is_admin = True)
+            Uform.save()
+            status = True
+
+        if request.POST.get("request") == "addProduct":
+            file = request.FILES["product_picture"]
+            name=request.POST.get("product_name")
+            category =request.POST.get("category")
+            price =request.POST.get("price")
+            picture =file.name
+            Pform = Product(product_name=name,product_category=category,product_picture=picture,price=price)
+            fs = FileSystemStorage()
+            fs.save(file.name,file)
+            Pform.save()
+            status = True
+
+        return JsonResponse({'status':status})

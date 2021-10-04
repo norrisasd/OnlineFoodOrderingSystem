@@ -8,8 +8,9 @@
         </button>
       </div>
       <div class="modal-body">
-        <form method="post" enctype="multipart/form-data">
+        <form method="POST" id="EmployeeForm" onsubmit="return addEmployee(this);" enctype="multipart/form-data">
           {% csrf_token %}
+          <input type="text" name="request" value="addEmployee" style="display:none">
           <div class="form-group">
             <input type="text" class="form-control" placeholder="Username" name="username">
           </div>
@@ -17,7 +18,8 @@
             <input type="password" class="form-control" placeholder="Password" name="password" id="password">
           </div>
           <div class="form-group">
-            <input type="password" class="form-control" placeholder="Confirm Password" name="password" id="password" oninput="checkPassword(this.value)">
+            <input type="password" class="form-control" placeholder="Confirm Password" name="password" id="password"
+              oninput="checkPassword(this.value)">
           </div>
           <div class="form-group">
             <input type="text" class="form-control" placeholder="First Name" name="first_name">
@@ -28,12 +30,13 @@
           <div class="form-group">
             <input type="text" class="form-control" placeholder="Phone Number" name="phone_number">
           </div>
-        </form>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="submit" class="btn btn-primary" id = "btnAddEmployee" name = "btnAddEmployee">Add</button>
+        <button type="submit" class="btn btn-primary" id="btnAddEmployee" name="btnAddEmployee"
+          disabled>Add</button>
       </div>
+      </form>
     </div>
   </div>
 </div>
