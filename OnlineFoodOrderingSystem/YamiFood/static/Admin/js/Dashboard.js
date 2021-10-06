@@ -213,37 +213,35 @@ function addEmployee(data){
     });
     return false;
 }
-function setUserID(id){
-    $('#btnUpdateUser').val(id);
+
+function updateUser(form){
+    if (confirm("Are you sure you want to save changes?")){
+        $.ajax({
+            type: 'post',
+            url: '',
+            beforeSend: function(xhr, settings) {
+                if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
+                    xhr.setRequestHeader("X-CSRFToken", csrftoken);
+                }
+            },
+            data: new FormData(form),
+            contentType: false,
+            cache: false,
+            processData: false,
+            success: function (response) {
+                if (response.status) {
+                    toastr.success("User Updated");
+                    $(".modal").modal("hide");
+                    refreshTable();
+                    $('#UserForm').trigger("reset");
+                    refreshTableUser();
+                }else{
+                    toastr.error(response.status);
+                }
+            }
+        });
+    }
     
-}
-function updateUser(id){
-    $.ajax({
-        type: 'post',
-        url: '',
-        beforeSend: function(xhr, settings) {
-            if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
-                xhr.setRequestHeader("X-CSRFToken", csrftoken);
-            }
-        },
-        data:{
-            request:"updateUser",
-            user_id:id,
-        },
-        contentType: false,
-        cache: false,
-        processData: false,
-        success: function (response) {
-            if (response.status) {
-                toastr.success("User Updated");
-                $(".modal").modal("hide");
-                refreshTable();
-                $('#UserForm').trigger("reset");
-            }else{
-                toastr.error(response.status);
-            }
-        }
-    });
     return false;
 }
 function addToCart(id){
@@ -273,7 +271,7 @@ function refreshTable() {
         type: 'get',
         url:'',
         data:{
-            getProducts:true
+            request:"getProducts"
         },
         success: function (response) {
             data = JSON.parse(response.products);
@@ -288,6 +286,137 @@ function refreshTable() {
                     `<a class="btn btn-outline-secondary text-center"
                     style="padding-left:15px;padding-right: 15px;" href="#"><i
                         class="fas fa-eye"></i></a>`
+                ]).draw();
+            }
+            
+            
+            
+        }
+    });
+    return false;
+}
+function deleteProduct(id){
+    if(confirm("Are you sure you want to delete this product")){
+        $.ajax({
+            type:'post',
+            url:'',
+            beforeSend: function(xhr, settings) {
+                if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
+                    xhr.setRequestHeader("X-CSRFToken", csrftoken);
+                }
+            },
+            data:{
+                request:"deleteProduct",
+                product_id:id
+            },
+            success:function(response){
+               if(response.status){
+                   toastr.success("Product Deleted");
+                   $(".modal").modal("hide");
+                    refreshTable();
+                    $('#ProductForm').trigger("reset");
+
+               }
+            }
+        });
+    }
+    return false;
+}
+function deleteUser(id){
+    if(confirm("Are you sure you want to delete this user")){
+        $.ajax({
+            type:'post',
+            url:'',
+            beforeSend: function(xhr, settings) {
+                if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
+                    xhr.setRequestHeader("X-CSRFToken", csrftoken);
+                }
+            },
+            data:{
+                request:"deleteUser",
+                user_id:id
+            },
+            success:function(response){
+               if(response.status){
+                   toastr.success("User Deleted");
+                   $(".modal").modal("hide");
+                    refreshTableUser();
+                    $('#UserForm').trigger("reset");
+
+               }
+            }
+        });
+    }
+    return false;
+}
+function deleteOrder(form){
+    $.ajax({
+        type: 'post',
+        url: '',
+        data: new FormData(form),
+        contentType: false,
+        cache: false,
+        processData: false,
+        success: function (response) {
+            if (response.status) {
+                toastr.success("Order Deleted");
+                $(".modal").modal("hide");
+            }else{
+                toastr.error(response.status);
+            }
+        }
+    });
+    return false;
+
+}
+function updateProduct(form){
+    if(confirm("Are you sure you want to save changes?")){
+        $.ajax({
+            type: 'post',
+            url: '',
+            data: new FormData(form),
+            contentType: false,
+            cache: false,
+            processData: false,
+            success: function (response) {
+                if (response.status) {
+                    toastr.success("Product Updated");
+                    $(".modal").modal("hide");
+                    refreshTable();
+                    $('#ProductForm').trigger("reset");
+                }else{
+                    toastr.error(response.status);
+                }
+            }
+        });
+       
+    }
+    return false;
+}
+function updateUserForm(id){
+    $('#userView-'+id+' #UserForm')
+}
+function refreshTableUser() {
+    let cb = '';
+    $.ajax({
+        type: 'get',
+        url:'',
+        data:{
+            request:'getUsers'
+        },
+        success: function (response) {
+            data = JSON.parse(response.products);
+            dt.clear().draw();
+            for (var da in data){
+                dt.row.add([
+                    cb,
+                    data[da].pk,
+                    data[da].fields.first_name,
+                    data[da].fields.last_name,
+                    data[da].fields.is_admin == 1 ? 'Employee' : 'Customer',
+                    `<button type="button" class="btn btn-outline-secondary text-center" data-toggle="modal" data-target="#userView-`+data[da].pk+`"
+                    style="padding-left:15px;padding-right: 15px;"> <i class="fas fa-eye"></i>
+                </button>`
                 ]).draw();
             }
             

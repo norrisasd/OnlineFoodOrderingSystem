@@ -1,0 +1,39 @@
+<div class="modal fade" id="OrderView" tabindex="-1" role="dialog" aria-labelledby="userModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title" id="userModalLabel">Order Details</h1>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <form method="POST" id="UserForm" onsubmit='return deleteOrder(this);' enctype="multipart/form-data">
+        <div class="modal-body">
+            {% csrf_token %}
+            <input type="text" name="order_id" value="{{order.order_id}}" style="display:none">
+            <input type="text" name="request" value="deleteOrder" style="display:none">
+            {% for details in order_details%}
+               {% if order.order_id == details.order_id_id %}
+                <div class="row">
+                    <div class="col">
+                        <h3>{{details.product_id.product_name}}</h3>
+                    </div>
+                    <div class="col">
+                        <h3>{{details.quantity}}</h3>
+                    </div>
+                    <div class="col">
+                        <h3>{% widthratio details.quantity 1 details.product_id.price %}</h3>
+                    </div>
+                </div>
+                {% endif %}
+            
+            {% endfor %}
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="submit" class="btn btn-danger">Delete</button>
+        </div>
+        </form>
+      </div>
+    </div>
+  </div>

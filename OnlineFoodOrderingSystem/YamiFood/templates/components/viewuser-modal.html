@@ -1,4 +1,4 @@
-<div class="modal fade" id="userView" tabindex="-1" role="dialog" aria-labelledby="userModalLabel" aria-hidden="true">
+<div class="modal fade" id="userView-{{user.user_id}}" tabindex="-1" role="dialog" aria-labelledby="userModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -7,9 +7,11 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <form method="POST" id="UserForm" onsubmit='return updateUser("{{user.user_id}}");' enctype="multipart/form-data">
+      <form method="POST" id="UserForm" onsubmit='return updateUser(this);' enctype="multipart/form-data">
       <div class="modal-body">
           {% csrf_token %}
+          <input type="text" name="user_id" value="{{user.user_id}}" style="display:none">
+          <input type="text" name="request" value="updateUser" style="display:none">
           <div class="form-group">
             <input type="text" class="form-control" placeholder="Username" name="username" value={{user.username}}>
           </div>
@@ -33,7 +35,7 @@
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
         <button type="submit" class="btn btn-primary" id="btnUpdateUser" name="btnUpdateUser"
           >Save</button>
-        <button type="submit" class="btn btn-danger" data-toggle="modal" data-target="#deleteUserModal">Delete</button>
+        <button type="button" class="btn btn-danger" onclick="deleteUser('{{user.user_id}}')">Delete</button>
       </div>
       </form>
     </div>

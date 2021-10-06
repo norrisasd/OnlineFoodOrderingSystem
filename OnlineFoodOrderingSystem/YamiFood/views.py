@@ -74,18 +74,23 @@ class DashboardView(View):
         products = Product.objects.all()
         orders = Order.objects.all()
         deliveries = Delivery.objects.all()
+        order_details=Order_Details.objects.get_queryset().select_related("product_id",'order_id').filter(order_id__status=0)#chamge to 1 later
         context = {
             'users': users,
             'products': products,
             'orders': orders,
             'deliveries': deliveries,
             'nbar':'dashboard',
-            'carts':cart
+            'carts':cart,
+            'order_details':order_details
         }
-        if request.is_ajax(): 
+        if request.GET.get('request') == "getProducts": 
             data = serializers.serialize('json', list(products))
             return JsonResponse({'products':data},status=200)
                 
+        if request.GET.get('request') == 'getUsers':
+            data = serializers.serialize('json', list(users))
+            return JsonResponse({'products':data},status=200)
                 
         return render(request,'./pages/dashboard.html', context)  
 
@@ -117,16 +122,37 @@ class DashboardView(View):
             Pform.save()
             status = True
 
-        # if request.POST.get("request") == "updateUser":
-        #     user_id = request.POST.get('user_id')
-        #     username = request.POST.get('username')
-        #     password = request.POST.get('password')
-        #     first_name = request.POST.get('first_name')
-        #     last_name = request.POST.get('last_name')
-        #     phone_number = request.POST.get('phone_number')
-        #     update_user = User.objects.filter(user_id).update(username = username, password = password, first_name = first_name, last_name = last_name, phone_number = phone_number)
-        #     # print(update_user)
-        #     # print('updated successfully')
-            
+        if request.POST.get("request") == "updateUser":
+            user_id = request.POST.get('user_id')
+            username = request.POST.get('username')
+            password = request.POST.get('password')
+            first_name = request.POST.get('first_name')
+            last_name = request.POST.get('last_name')
+            phone_number = request.POST.get('phone_number')
+            update_user = User.objects.filter(user_id=user_id).update(username = username, password = password, first_name = first_name, last_name = last_name, phone_number = phone_number)
+            status = True
 
-        return JsonResponse({'status':user_id})
+        if request.POST.get("request") == "updateProduct":
+            product_id=request.POST.get("product_id")
+            name=request.POST.get("product_name")
+            category =request.POST.get("category")
+            price =request.POST.get("price")
+            Pform = Product.objects.filter(product_id=product_id).update(product_name=name,product_category=category,price=price)
+            status = True
+           
+        if request.POST.get("request") == "deleteProduct":
+            product_id=request.POST.get("product_id")
+            Product.objects.filter(product_id=product_id).delete()
+            status = True
+
+        if request.POST.get("request") == "deleteUser":
+            user_id = request.POST.get('user_id')
+            User.objects.filter(user_id=user_id).delete()
+            status = True
+
+        if request.POST.get("request") == "deleteOrder":
+            order_id=request.POST.get('order_id')
+            Order.objects.filter(order_id=order_id).delete()
+            status = True
+            
+        return JsonResponse({'status':status})
