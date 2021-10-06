@@ -107,7 +107,7 @@
 									<!-- <td>{{user.phone_number}}</td> -->
 									<td>{% if user.is_admin == 1 %}Employee{% else %}Customer{% endif %}</td>
 									<td>
-										<button type="button" class="btn btn-outline-secondary text-center" data-toggle="modal" data-target="#userView"
+										<button type="button" class="btn btn-outline-secondary text-center" onclick="setUserID('{{user.user_id}}')" data-toggle="modal" data-target="#userView"
 											style="padding-left:15px;padding-right: 15px;"> <i class="fas fa-eye"></i>
 										</button>
 										{% include "../components/viewuser-modal.html" %}
@@ -241,16 +241,9 @@
 									<td>{{order.total_price}}</td>
 									<td>{{order.user_id_id}}</td>
 									<td>
-										<div class="row text-center">
-											<div class="col-sm">
-												<a class="btn btn-outline-secondary text-center" href="#"><i
-														class="fas fa-edit"></i></a>
-											</div>
-											<div class="col">
-												<a href="#" class="btn btn-outline-secondary text-center"><i
-														class="fas fa-trash-alt"></i></a>
-											</div>
-										</div>
+										<button type="button" class="btn btn-outline-secondary text-center" data-toggle="modal" data-target="#productView"
+											style="padding-left:15px;padding-right: 15px;"> <i class="fas fa-eye"></i>
+										</button>
 									</td>
 								</tr>
 								{% endfor %}

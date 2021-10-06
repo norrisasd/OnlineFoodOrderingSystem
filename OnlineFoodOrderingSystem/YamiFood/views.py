@@ -125,7 +125,8 @@ class DashboardView(View):
         #     last_name = request.POST.get('last_name')
         #     phone_number = request.POST.get('phone_number')
         #     update_user = User.objects.filter(user_id).update(username = username, password = password, first_name = first_name, last_name = last_name, phone_number = phone_number)
-        #     print(update_user)
-        #     print('updated successfully')
+        #     # print(update_user)
+        #     # print('updated successfully')
+            
 
-        return JsonResponse({'status':status})
+        return JsonResponse({'status':user_id})

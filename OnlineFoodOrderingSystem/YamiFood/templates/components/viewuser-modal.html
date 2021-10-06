@@ -7,7 +7,7 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <form method="POST" id="UserForm" onsubmit='updateUser("{{user.user_id}}")' enctype="multipart/form-data">
+      <form method="POST" id="UserForm" onsubmit='return updateUser("{{user.user_id}}");' enctype="multipart/form-data">
       <div class="modal-body">
           {% csrf_token %}
           <div class="form-group">
@@ -31,7 +31,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="submit" class="btn btn-primary" id="btnUpdateUser" name="btnUpdateUser" value="updateUser"
+        <button type="submit" class="btn btn-primary" id="btnUpdateUser" name="btnUpdateUser"
           >Save</button>
         <button type="submit" class="btn btn-danger" data-toggle="modal" data-target="#deleteUserModal">Delete</button>
       </div>

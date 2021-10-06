@@ -213,35 +213,39 @@ function addEmployee(data){
     });
     return false;
 }
-// function updateUser(id){
-//     $.ajax({
-//         type: 'post',
-//         url: '',
-//         beforeSend: function(xhr, settings) {
-//             if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
-//                 xhr.setRequestHeader("X-CSRFToken", csrftoken);
-//             }
-//         },
-//         data:{
-//             request:"updateUser",
-//             user_id:id,
-//         },
-//         contentType: false,
-//         cache: false,
-//         processData: false,
-//         success: function (response) {
-//             if (response.status) {
-//                 toastr.success("User Updated");
-//                 $(".modal").modal("hide");
-//                 refreshTable();
-//                 $('#UserForm').trigger("reset");
-//             }else{
-//                 toastr.error(response.status);
-//             }
-//         }
-//     });
-//     return false;
-// }
+function setUserID(id){
+    $('#btnUpdateUser').val(id);
+    
+}
+function updateUser(id){
+    $.ajax({
+        type: 'post',
+        url: '',
+        beforeSend: function(xhr, settings) {
+            if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
+                xhr.setRequestHeader("X-CSRFToken", csrftoken);
+            }
+        },
+        data:{
+            request:"updateUser",
+            user_id:id,
+        },
+        contentType: false,
+        cache: false,
+        processData: false,
+        success: function (response) {
+            if (response.status) {
+                toastr.success("User Updated");
+                $(".modal").modal("hide");
+                refreshTable();
+                $('#UserForm').trigger("reset");
+            }else{
+                toastr.error(response.status);
+            }
+        }
+    });
+    return false;
+}
 function addToCart(id){
     $.ajax({
         type:'post',
