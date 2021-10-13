@@ -14,3 +14,9 @@ class OrderDetailsForm(forms.ModelForm):
     class Meta:
         model = Order_Details
         fields = ('quantity','order_id','product_id')
+
+class CarrierForm(forms.ModelForm):
+    class Meta:
+        model = Delivery 
+        fields = ('delivery_carrier',)
+

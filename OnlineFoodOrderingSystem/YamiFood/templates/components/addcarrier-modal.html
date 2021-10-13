@@ -8,17 +8,19 @@
         </button>
       </div>
       <div class="modal-body">
-        <form method="post" enctype="multipart/form-data">
+        <form method="post" onsubmit="return addCarrier(this);" enctype="multipart/form-data">
           {% csrf_token %}
           <div class="form-group">
+            <input type="text" name="request" value="addCarrier" style="display:none">
             <input type="text" class="form-control" placeholder="Carrier Name" name="carrier_name">
           </div>
-        </form>
+        
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="submit" class="btn btn-primary" id = "btnAddCarrier" name = "btnAddCarrier">Add</button>
+        <button type="submit" class="btn btn-primary">Add</button>
       </div>
+    </form>
     </div>
   </div>
 </div>

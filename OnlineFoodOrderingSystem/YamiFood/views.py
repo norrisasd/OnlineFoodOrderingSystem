@@ -38,7 +38,7 @@ class OrderView(View):
         if request.POST.get("request") == "addToCart":
             form = OrderDetailsForm(request.POST)
             product = request.POST.get("product_id")
-            form = Order_Details(quantity = 0,order_id_id = 1,product_id_id = product)
+            form = Order_Details(quantity = 0,order_id_id = 2,product_id_id = product)
             form.save()
             return JsonResponse({'check':True},status=200)
 
@@ -97,6 +97,7 @@ class DashboardView(View):
     def post(self,request):
         Pform = ProductForm(request.POST)
         Uform= UserForm(request.POST)
+        Cform = Delivery(request.POST)
         status = False
         #Product Add
 
@@ -155,4 +156,9 @@ class DashboardView(View):
             Order.objects.filter(order_id=order_id).delete()
             status = True
             
+        if request.POST.get("request") == "addCarrier":
+            carrier=request.POST.get('carrier_name')
+            Cform = Delivery(delivery_carrier=carrier)
+            Cform.save()
+            status = True
         return JsonResponse({'status':status})

@@ -204,8 +204,9 @@ function addEmployee(data){
             if (response.status) {
                 toastr.success("Employee Added");
                 $(".modal").modal("hide");
-                refreshTable();
+                refreshTableUser();
                 $('#EmployeeForm').trigger("reset");
+                refreshTableUser();
             }else{
                 toastr.error(response.status);
             }
@@ -265,6 +266,21 @@ function addToCart(id){
         }
     });
 }
+function addCarrier(form){
+    $.ajax({
+        type:'post',
+        url:'',
+        beforeSend: function(xhr, settings) {
+            if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
+                xhr.setRequestHeader("X-CSRFToken", csrftoken);
+            }
+        },
+        data:new FormData(form),
+        success:function(response){
+            toastr.info(response.status);
+        }
+    });
+}
 function refreshTable() {
     let cb = '';
     $.ajax({
@@ -283,9 +299,9 @@ function refreshTable() {
                     data[da].fields.product_name,
                     data[da].fields.product_category,
                     data[da].fields.price,
-                    `<a class="btn btn-outline-secondary text-center"
-                    style="padding-left:15px;padding-right: 15px;" href="#"><i
-                        class="fas fa-eye"></i></a>`
+                    `<button type="button" class="btn btn-outline-secondary text-center" data-toggle="modal" data-target="#productView-`+data[da].pk+`"
+                    style="padding-left:15px;padding-right: 15px;"> <i class="fas fa-eye"></i>
+                    </button>`
                 ]).draw();
             }
             
@@ -418,6 +434,12 @@ function refreshTableUser() {
                     style="padding-left:15px;padding-right: 15px;"> <i class="fas fa-eye"></i>
                 </button>`
                 ]).draw();
+                // UPDATE USER INPUTS
+                $('#userView-'+data[da].pk+' form input[name="first_name"]').val(data[da].fields.first_name)
+                $('#userView-'+data[da].pk+' form input[name="last_name"]').val(data[da].fields.last_name)
+                $('#userView-'+data[da].pk+' form input[name="phone_number"]').val(data[da].fields.phone_number)
+                $('#userView-'+data[da].pk+' form input[name="username"]').val(data[da].fields.username)
+                $('#userView-'+data[da].pk+' form input[name="password"]').val(data[da].fields.password)
             }
             
             
