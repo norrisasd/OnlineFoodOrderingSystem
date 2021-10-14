@@ -8,7 +8,7 @@
         </button>
       </div>
       <div class="modal-body">
-        <form method="post" onsubmit="return addCarrier(this);" enctype="multipart/form-data">
+        <form method="post" onsubmit='return addCarrier(this);' enctype="multipart/form-data">
           {% csrf_token %}
           <div class="form-group">
             <input type="text" name="request" value="addCarrier" style="display:none">
