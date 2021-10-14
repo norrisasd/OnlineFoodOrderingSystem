@@ -5,7 +5,7 @@ from .forms import *
 from django.core.files.storage import FileSystemStorage
 from django.core import serializers
 from django.http import JsonResponse
-
+from datetime import date
 
 # Create your views here.
 cart = Order_Details.objects.get_queryset().select_related("product_id",'order_id').filter(order_id__status=0)
@@ -35,12 +35,20 @@ class OrderView(View):
             return JsonResponse({'products':products},status=200)
         return render(request,'./pages/menu.html',{'nbar':'order','products':products})
     def post(self,request):
+        
         if request.POST.get("request") == "addToCart":
+            try:
+                order=Order.objects.latest('order_id').order_id
+            except:
+                order = OrderForm(request.POST)
+                order=Order(date_ordered=date.today(),total_price=0,user_id_id=1,status=0)
+                order.save()
+                order=Order.objects.latest('order_id').order_id
             form = OrderDetailsForm(request.POST)
             product = request.POST.get("product_id")
-            form = Order_Details(quantity = 0,order_id_id = 2,product_id_id = product)
+            form = Order_Details(quantity = 0,order_id_id = order,product_id_id = product)
             form.save()
-            return JsonResponse({'check':True},status=200)
+            return JsonResponse({'check':order},status=200)
 
 
 class FeaturesView(View):
@@ -92,6 +100,14 @@ class DashboardView(View):
             data = serializers.serialize('json', list(users))
             return JsonResponse({'products':data},status=200)
                 
+        if request.GET.get('request') == 'getCarrier':
+            data = serializers.serialize('json', list(deliveries))
+            return JsonResponse({'products':data},status=200)
+        
+        if request.GET.get('request') == 'getOrder':
+            data = serializers.serialize('json', list(orders))
+            return JsonResponse({'products':data},status=200)
+
         return render(request,'./pages/dashboard.html', context)  
 
     def post(self,request):
@@ -161,4 +177,16 @@ class DashboardView(View):
             Cform = Delivery(delivery_carrier=carrier)
             Cform.save()
             status = True
+
+        if request.POST.get("request") == "updateCarrier":
+            id=request.POST.get("delivery_id")
+            carrier = request.POST.get('carrier_name')
+            Delivery.objects.filter(delivery_id=id).update(delivery_carrier=carrier)
+            status = True
+
+        if request.POST.get("request") == "deleteCarrier":
+            id=request.POST.get("delivery_id")
+            Delivery.objects.filter(delivery_id=id).delete()
+            status = True
+
         return JsonResponse({'status':status})

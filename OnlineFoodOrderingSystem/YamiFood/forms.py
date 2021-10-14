@@ -20,3 +20,7 @@ class CarrierForm(forms.ModelForm):
         model = Delivery 
         fields = ('delivery_carrier',)
 
+class OrderForm(forms.ModelForm):
+    class Meta:
+        model = Order 
+        fields = ()

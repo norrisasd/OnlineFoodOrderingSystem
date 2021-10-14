@@ -259,6 +259,7 @@ function addToCart(id){
             product_id:id,
         },
         success:function(response){
+            toastr.info(response.check);
             if(response.check){
                 openNav();
                 refreshCart();
@@ -270,16 +271,19 @@ function addCarrier(form){
     $.ajax({
         type:'post',
         url:'',
-        beforeSend: function(xhr, settings) {
-            if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
-                xhr.setRequestHeader("X-CSRFToken", csrftoken);
-            }
-        },
+        contentType: false,
+        cache: false,
+        processData: false,
         data:new FormData(form),
         success:function(response){
-            toastr.info(response.status);
+            if(response.status){
+                toastr.success("Carrier Added");
+                $(".modal").modal("hide");
+                refreshTableCarrier();
+            }
         }
     });
+    return false;
 }
 function refreshTable() {
     let cb = '';
@@ -377,6 +381,7 @@ function deleteOrder(form){
             if (response.status) {
                 toastr.success("Order Deleted");
                 $(".modal").modal("hide");
+                refreshTableOrder()
             }else{
                 toastr.error(response.status);
             }
@@ -384,6 +389,55 @@ function deleteOrder(form){
     });
     return false;
 
+}
+function deleteCarrier(id){
+    if(confirm("Are you sure you want to delete this product")){
+        $.ajax({
+            type:'post',
+            url:'',
+            beforeSend: function(xhr, settings) {
+                if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
+                    xhr.setRequestHeader("X-CSRFToken", csrftoken);
+                }
+            },
+            data:{
+                request:"deleteCarrier",
+                delivery_id:id
+            },
+            success:function(response){
+               if(response.status){
+                   toastr.success("Carrier Deleted");
+                   $(".modal").modal("hide");
+                    refreshTableCarrier();
+               }
+            }
+        });
+    }
+    return false;
+}
+
+function updateCarrier(form){
+    if(confirm("Are you sure you want to save changes?")){
+        $.ajax({
+            type: 'post',
+            url: '',
+            data: new FormData(form),
+            contentType: false,
+            cache: false,
+            processData: false,
+            success: function (response) {
+                if (response.status) {
+                    toastr.success("Carrier Updated");
+                    $(".modal").modal("hide");
+                    refreshTableCarrier();
+                }else{
+                    toastr.error(response.status);
+                }
+            }
+        });
+       
+    }
+    return false;
 }
 function updateProduct(form){
     if(confirm("Are you sure you want to save changes?")){
@@ -411,6 +465,36 @@ function updateProduct(form){
 }
 function updateUserForm(id){
     $('#userView-'+id+' #UserForm')
+}
+function refreshTableOrder(){
+    let cb = '';
+    $.ajax({
+        type: 'get',
+        url:'',
+        data:{
+            request:'getOrder'
+        },
+        success: function (response) {
+            data = JSON.parse(response.products);
+            dt2.clear().draw();
+            for (var da in data){
+                dt2.row.add([
+                    cb,
+                    data[da].pk,
+                    data[da].fields.date_ordered,
+                    data[da].fields.total_price,
+                    data[da].fields.user_id,
+                    `<button type="button" class="btn btn-outline-secondary text-center" data-toggle="modal" data-target="#OrderView"
+                    style="padding-left:15px;padding-right: 15px;"> <i class="fas fa-eye"></i>
+                </button>`
+                ]).draw();
+            }
+            
+            
+            
+        }
+    });
+    return false;
 }
 function refreshTableUser() {
     let cb = '';
@@ -440,6 +524,35 @@ function refreshTableUser() {
                 $('#userView-'+data[da].pk+' form input[name="phone_number"]').val(data[da].fields.phone_number)
                 $('#userView-'+data[da].pk+' form input[name="username"]').val(data[da].fields.username)
                 $('#userView-'+data[da].pk+' form input[name="password"]').val(data[da].fields.password)
+            }
+            
+            
+            
+        }
+    });
+    return false;
+}
+function refreshTableCarrier(){
+    let cb = '';
+    $.ajax({
+        type: 'get',
+        url:'',
+        data:{
+            request:'getCarrier'
+        },
+        success: function (response) {
+            data = JSON.parse(response.products);
+            dt3.clear().draw();
+            for (var da in data){
+                dt3.row.add([
+                    cb,
+                    data[da].pk,
+                    data[da].fields.delivery_carrier,
+                    `<button type="button" class="btn btn-outline-secondary text-center" data-toggle="modal" data-target="#carrierView-`+data[da].pk+`"
+                    style="padding-left:15px;padding-right: 15px;"> <i class="fas fa-eye"></i>
+                </button>`
+                ]).draw();
+        
             }
             
             
