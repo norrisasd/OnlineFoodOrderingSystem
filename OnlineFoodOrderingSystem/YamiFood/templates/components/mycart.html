@@ -12,13 +12,14 @@
                             <span>{{cart.product_id.product_name}}</span>
                         </div>
                         <div class="col-auto">
-                            <input type="number" class="form-control" min="0" max="50" value="{{cart.quantity}}"/>
+                            <input type="number" oninput='updateCart("{{cart.product_id_id}}")' class="form-control" min="0" max="50" value="{{cart.quantity}}"/>
                         </div>
                         <div class="col-auto"><a href="javascript:void(0)" class="text-secondary"
                                 style="padding:0;" onclick='removeItem("{{cart.product_id_id}}")'><span>&times;</span></a></div>
                     </div>
                 </li>
                 {% endfor %}
+                
                 <!-- <li>
                     <div class="row">
                         <div class="col">
@@ -46,9 +47,8 @@
                     </div>
                 </li> -->
             </ul>
-
             <div>
-                <a href="javascript:void(0)" onclick="refreshCart()" class="text-secondary text-center align-text-bottom"><b>CHECKOUT</b></a>
+                <a href="javascript:void(0)" onclick="checkout()" class="text-secondary text-center align-text-bottom"><b>CHECKOUT</b></a>
             </div>
         </div>
     </div>

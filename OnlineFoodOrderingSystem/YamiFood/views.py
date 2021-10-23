@@ -1,3 +1,4 @@
+from django.http.response import HttpResponse
 from django.shortcuts import redirect, render
 from django.views.generic import View
 from django.views.generic.base import RedirectView
@@ -9,18 +10,20 @@ from datetime import date
 
 # Create your views here.
 cart = Order_Details.objects.get_queryset().select_related("product_id",'order_id').filter(order_id__status=0)
+isLogin=False
+user_id=0
 class IndexView(View):
     def get(self,request):
-        return render(request,'./pages/index.html',{'nbar':'home'})
+        return render(request,'./pages/index.html',{'nbar':'home','status':isLogin})
 
 #About View
 class AboutView(View):
     def get(self,request):
-        return render(request,'./pages/about.html',{'nbar':'about'})
+        return render(request,'./pages/about.html',{'nbar':'about','status':isLogin})
 
 class ContactView(View):
     def get(self,request):
-        return render(request,'./pages/contact.html',{'nbar':'contact'})
+        return render(request,'./pages/contact.html',{'nbar':'contact','status':isLogin})
 
 
 class OrderView(View):
@@ -33,15 +36,15 @@ class OrderView(View):
                 prod = serializers.serialize('json', list(products))
                 return JsonResponse({'cart':mycart,'products':prod},status=200)
             return JsonResponse({'products':products},status=200)
-        return render(request,'./pages/menu.html',{'nbar':'order','products':products})
+        return render(request,'./pages/menu.html',{'nbar':'order','products':products,'status':isLogin})
     def post(self,request):
-        
         if request.POST.get("request") == "addToCart":
+            global user_id
             try:
                 order=Order.objects.latest('order_id').order_id
             except:
                 order = OrderForm(request.POST)
-                order=Order(date_ordered=date.today(),total_price=0,user_id_id=1,status=0)
+                order=Order(date_ordered=date.today(),total_price=0,user_id_id=user_id,status=0)
                 order.save()
                 order=Order.objects.latest('order_id').order_id
             form = OrderDetailsForm(request.POST)
@@ -49,15 +52,46 @@ class OrderView(View):
             form = Order_Details(quantity = 0,order_id_id = order,product_id_id = product)
             form.save()
             return JsonResponse({'check':order},status=200)
+        if request.POST.get("request") == "deleteItem":
+            id=request.POST.get("order_details_id")
+            Order_Details.objects.filter(order_details_id=id).delete()
+            return JsonResponse({'status':True},status=200)
+        if request.POST.get("request") == "updateCart":
+            id=request.POST.get("order_details_id")
+            value = request.POST.get("value")
+            Order_Details.objects.filter(order_details_id=id).update(quantity=value)
+            return JsonResponse({'status':True},status=200)
+        if request.POST.get("request") == "checkout":
+            try:
+                order=Order.objects.latest('order_id').order_id
+                check=True
+                Order.objects.filter(order_id=order).update(status=1)
+            except:
+                check=False
+            return JsonResponse({'status':check},status=200)
 
 
 class FeaturesView(View):
     def get(self,request):
-        return render(request,'./pages/features.html',{'nbar':'features'})
+        return render(request,'./pages/features.html',{'nbar':'features','status':isLogin})
 
 class LoginView(View):
     def get(self,request):
+        global isLogin,user_id
+        isLogin=False
+        user_id=0
         return render(request,'./pages/login.html',{'nbar':'login'})
+    def post(self,request):
+        username = request.POST.get("username")
+        password = request.POST.get("password")
+        queryset = User.objects.all().filter(username = username, password = password)
+        if queryset.exists():
+            global isLogin,user_id
+            isLogin = True
+            user_id=User.objects.get(username = username, password = password).user_id
+            return redirect('./')
+        else:
+            return redirect('./login')
 
 class SignupView(View):
     def get(self,request):
@@ -74,15 +108,15 @@ class SignupView(View):
         form = User(username = username, password = password, first_name = first_name, last_name = last_name, 
                     phone_number = phone_number, is_admin = False)
         form.save()
-        return redirect('./home')
+        return redirect('./login')
 
 class DashboardView(View):
     def get(self,request):
         users = User.objects.all()
         products = Product.objects.all()
-        orders = Order.objects.all()
+        orders = Order.objects.get_queryset().filter(status=1)
         deliveries = Delivery.objects.all()
-        order_details=Order_Details.objects.get_queryset().select_related("product_id",'order_id').filter(order_id__status=0)#chamge to 1 later
+        order_details=Order_Details.objects.get_queryset().select_related("product_id",'order_id').filter(order_id__status=1)#chamge to 1 later
         context = {
             'users': users,
             'products': products,
@@ -91,6 +125,7 @@ class DashboardView(View):
             'nbar':'dashboard',
             'carts':cart,
             'order_details':order_details
+            ,'status':isLogin
         }
         if request.GET.get('request') == "getProducts": 
             data = serializers.serialize('json', list(products))

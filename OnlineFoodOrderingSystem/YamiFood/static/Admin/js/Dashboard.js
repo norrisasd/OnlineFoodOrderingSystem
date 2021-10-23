@@ -259,7 +259,6 @@ function addToCart(id){
             product_id:id,
         },
         success:function(response){
-            toastr.info(response.check);
             if(response.check){
                 openNav();
                 refreshCart();
@@ -267,6 +266,7 @@ function addToCart(id){
         }
     });
 }
+refreshCart();
 function addCarrier(form){
     $.ajax({
         type:'post',
@@ -561,6 +561,46 @@ function refreshTableCarrier(){
     });
     return false;
 }
+function updateCart(id,value){
+    $.ajax({
+        type:'post',
+        url:'',
+        beforeSend: function(xhr, settings) {
+            if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
+                xhr.setRequestHeader("X-CSRFToken", csrftoken);
+            }
+        },
+        data:{
+            request:"updateCart",
+            order_details_id:id,
+            value:value
+        },
+        success:function(response){
+        }
+    });
+}
+function checkout(){
+    $.ajax({
+        type:'post',
+        url:'',
+        beforeSend: function(xhr, settings) {
+            if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
+                xhr.setRequestHeader("X-CSRFToken", csrftoken);
+            }
+        },
+        data:{
+            request:"checkout",
+        },
+        success:function(response){
+            if(response.status){
+                toastr.success("Cart Checkout!")
+                refreshCart()
+            }else{
+                toastr.error("Nothing to Checkout")
+            }
+        }
+    });
+}
 function refreshCart(){
     let body='';
     let prodName='';
@@ -585,7 +625,7 @@ function refreshCart(){
                             <span>`+prodName+`</span>
                         </div>
                         <div class="col-auto">
-                            <input type="number" class="form-control" min="0" max="50" value="`+data[da].fields.quantity+`"/>
+                            <input type="number" oninput="updateCart(`+data[da].pk+`,this.value)" class="form-control" min="0" max="50" value="`+data[da].fields.quantity+`"/>
                         </div>
                         <div class="col-auto"><a href="javascript:void(0)" class="text-secondary"
                                 style="padding:0;" onclick='removeItem("`+data[da].pk+`")'><span>&times;</span></a></div>
@@ -599,6 +639,7 @@ function refreshCart(){
         }
     });
 }
+
 function checkPassword(value){
     pass = $("#password").val();
     if(pass == value){
@@ -622,6 +663,27 @@ function openNav() {
     // document.getElementById("main").style.marginLeft = "0";
     // document.body.style.backgroundColor = "white";
   }
-  function removeItem(index){
-      $("#cartlist li:nth-child("+index+")").remove();    
+  function removeItem(id){
+    if(confirm("Are you sure you want to delete this Item?")){
+        $.ajax({
+            type:'post',
+            url:'',
+            beforeSend: function(xhr, settings) {
+                if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
+                    xhr.setRequestHeader("X-CSRFToken", csrftoken);
+                }
+            },
+            data:{
+                request:"deleteItem",
+                order_details_id:id
+            },
+            success:function(response){
+               if(response.status){
+                   toastr.success("Item Deleted");
+                    refreshCart();
+               }
+            }
+        });
+    }
+    return false;
   }
