@@ -47,9 +47,15 @@
                     </div>
                 </li> -->
             </ul>
-            <div>
-                <a href="javascript:void(0)" onclick="checkout()" class="text-secondary text-center align-text-bottom"><b>CHECKOUT</b></a>
+            <div class="text-center align-text-bottom">
+                {% comment %} <a href="javascript:void(0)" onclick="checkout()" class="text-secondary text-center align-text-bottom"><b>CHECKOUT</b></a> {% endcomment %}
+                <!-- Button trigger modal -->
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
+                Proceed to Checkout
+                </button>
             </div>
+            <!-- Modal -->
+            {% include "../components/checkout-modal.html" %}
         </div>
     </div>
 </div>
